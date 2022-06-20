@@ -16,6 +16,8 @@
 		84088D532860F9FE00B3942C /* light_snow.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D4B2860F9FE00B3942C /* light_snow.json */; };
 		84088D542860F9FE00B3942C /* partly_cloudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D4C2860F9FE00B3942C /* partly_cloudy.json */; };
 		84088D552860F9FE00B3942C /* heavy_rain.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D4D2860F9FE00B3942C /* heavy_rain.json */; };
+		84088D572861126000B3942C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84088D562861126000B3942C /* APIManager.swift */; };
+		84088D5A286119BE00B3942C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84088D59286119BE00B3942C /* Location.swift */; };
 		849CC38928605E0400697534 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CC38828605E0400697534 /* AppDelegate.swift */; };
 		849CC38B28605E0400697534 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CC38A28605E0400697534 /* SceneDelegate.swift */; };
 		849CC38D28605E0400697534 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CC38C28605E0400697534 /* ViewController.swift */; };
@@ -35,6 +37,8 @@
 		84088D4B2860F9FE00B3942C /* light_snow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = light_snow.json; sourceTree = "<group>"; };
 		84088D4C2860F9FE00B3942C /* partly_cloudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = partly_cloudy.json; sourceTree = "<group>"; };
 		84088D4D2860F9FE00B3942C /* heavy_rain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heavy_rain.json; sourceTree = "<group>"; };
+		84088D562861126000B3942C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		84088D59286119BE00B3942C /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		849CC38528605E0400697534 /* Weatherly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weatherly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849CC38828605E0400697534 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		849CC38A28605E0400697534 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,14 @@
 			path = Lotties;
 			sourceTree = "<group>";
 		};
+		84088D582861199D00B3942C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84088D59286119BE00B3942C /* Location.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		849CC37C28605E0400697534 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +100,7 @@
 				84DB761A2860F043009A9DFB /* View Controllers */,
 				84DB76192860F034009A9DFB /* API */,
 				849CC38728605E0400697534 /* Weatherly */,
+				84088D582861199D00B3942C /* Models */,
 				849CC38628605E0400697534 /* Products */,
 				8B63B24D5B19903A95B4ECD2 /* Pods */,
 				494B4320B69DAC761A7586C3 /* Frameworks */,
@@ -118,6 +131,7 @@
 		84DB76192860F034009A9DFB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				84088D562861126000B3942C /* APIManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -262,7 +276,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84088D572861126000B3942C /* APIManager.swift in Sources */,
 				849CC38D28605E0400697534 /* ViewController.swift in Sources */,
+				84088D5A286119BE00B3942C /* Location.swift in Sources */,
 				849CC38928605E0400697534 /* AppDelegate.swift in Sources */,
 				849CC38B28605E0400697534 /* SceneDelegate.swift in Sources */,
 			);

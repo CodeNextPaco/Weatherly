@@ -10,13 +10,15 @@ import Lottie
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    let manager = APIManager()
     @IBOutlet weak var searchField: UITextField!
     var animationView : AnimationView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         
         
         //TESTING LOTTIE
@@ -26,10 +28,6 @@ class ViewController: UIViewController {
         view.insertSubview(animationView!, at: 0)
         animationView?.animationSpeed = 0.8
         animationView?.play()
-        
-        
-     
-        
         
     }
    
@@ -43,6 +41,25 @@ class ViewController: UIViewController {
             let locationToSearch = self.searchField.text
             
             print(locationToSearch!)
+            
+            Task {
+                
+                
+                let location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
+                
+                print("Getting Location data ---->")
+                print(location)
+                
+                self.outputLabel.text = """
+                    Coordinates for: \( location["name"] ?? "None found")
+                    
+                    Lat: \(location["lat"] ?? "None found"),
+                    Lon: \(location["lon"] ?? "None found")
+
+                    """
+                
+                
+            }
             
         } else {
             

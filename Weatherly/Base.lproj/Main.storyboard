@@ -40,16 +40,29 @@
                                     <constraint firstAttribute="height" constant="60" id="d1t-FI-Jfb"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7n-ek-icg">
+                                <rect key="frame" x="20" y="136" width="374" height="149"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="149" id="kTY-2N-trh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.83671005195642645" green="0.77413618022048591" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="cVk-mc-QAI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="Aks-cX-6GN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cVk-mc-QAI" secondAttribute="trailing" constant="12" id="NcI-2p-I93"/>
+                            <constraint firstItem="h7n-ek-icg" firstAttribute="top" secondItem="cVk-mc-QAI" secondAttribute="bottom" constant="12" id="TMb-Xu-R9U"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h7n-ek-icg" secondAttribute="trailing" constant="20" id="eXt-3T-00V"/>
+                            <constraint firstItem="h7n-ek-icg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="qW0-fa-Wzg"/>
                             <constraint firstItem="cVk-mc-QAI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="yXk-ck-cBb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="outputLabel" destination="h7n-ek-icg" id="F53-mf-Gxg"/>
                         <outlet property="searchField" destination="pMZ-pM-Mqm" id="MkV-z5-Crx"/>
                     </connections>
                 </viewController>
