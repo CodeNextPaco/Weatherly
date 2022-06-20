@@ -52,7 +52,6 @@ class ViewController: UIViewController {
                 
                 self.outputLabel.text = """
                     Coordinates for: \( location["name"] ?? "None found")
-                    
                     Lat: \(location["lat"] ?? "None found"),
                     Lon: \(location["lon"] ?? "None found")
 
