@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4CA602C42DC319FEA8F5B8C9 /* Pods_Weatherly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18280ECDE336FBA88D5DB1DB /* Pods_Weatherly.framework */; };
+		84088D4E2860F9FE00B3942C /* stormy.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D462860F9FD00B3942C /* stormy.json */; };
+		84088D4F2860F9FE00B3942C /* cloudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D472860F9FD00B3942C /* cloudy.json */; };
+		84088D502860F9FE00B3942C /* sunny.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D482860F9FD00B3942C /* sunny.json */; };
+		84088D512860F9FE00B3942C /* thunder.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D492860F9FD00B3942C /* thunder.json */; };
+		84088D522860F9FE00B3942C /* windy.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D4A2860F9FD00B3942C /* windy.json */; };
+		84088D532860F9FE00B3942C /* light_snow.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D4B2860F9FE00B3942C /* light_snow.json */; };
+		84088D542860F9FE00B3942C /* partly_cloudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D4C2860F9FE00B3942C /* partly_cloudy.json */; };
+		84088D552860F9FE00B3942C /* heavy_rain.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D4D2860F9FE00B3942C /* heavy_rain.json */; };
 		849CC38928605E0400697534 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CC38828605E0400697534 /* AppDelegate.swift */; };
 		849CC38B28605E0400697534 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CC38A28605E0400697534 /* SceneDelegate.swift */; };
 		849CC38D28605E0400697534 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CC38C28605E0400697534 /* ViewController.swift */; };
@@ -19,6 +27,14 @@
 /* Begin PBXFileReference section */
 		18280ECDE336FBA88D5DB1DB /* Pods_Weatherly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weatherly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4184F94FC55367165ACA10 /* Pods-Weatherly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weatherly.debug.xcconfig"; path = "Target Support Files/Pods-Weatherly/Pods-Weatherly.debug.xcconfig"; sourceTree = "<group>"; };
+		84088D462860F9FD00B3942C /* stormy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stormy.json; sourceTree = "<group>"; };
+		84088D472860F9FD00B3942C /* cloudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudy.json; sourceTree = "<group>"; };
+		84088D482860F9FD00B3942C /* sunny.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunny.json; sourceTree = "<group>"; };
+		84088D492860F9FD00B3942C /* thunder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thunder.json; sourceTree = "<group>"; };
+		84088D4A2860F9FD00B3942C /* windy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = windy.json; sourceTree = "<group>"; };
+		84088D4B2860F9FE00B3942C /* light_snow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = light_snow.json; sourceTree = "<group>"; };
+		84088D4C2860F9FE00B3942C /* partly_cloudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = partly_cloudy.json; sourceTree = "<group>"; };
+		84088D4D2860F9FE00B3942C /* heavy_rain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heavy_rain.json; sourceTree = "<group>"; };
 		849CC38528605E0400697534 /* Weatherly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weatherly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849CC38828605E0400697534 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		849CC38A28605E0400697534 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,9 +66,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		84088D452860F2BA00B3942C /* Lotties */ = {
+			isa = PBXGroup;
+			children = (
+				84088D472860F9FD00B3942C /* cloudy.json */,
+				84088D4D2860F9FE00B3942C /* heavy_rain.json */,
+				84088D4B2860F9FE00B3942C /* light_snow.json */,
+				84088D4C2860F9FE00B3942C /* partly_cloudy.json */,
+				84088D462860F9FD00B3942C /* stormy.json */,
+				84088D482860F9FD00B3942C /* sunny.json */,
+				84088D492860F9FD00B3942C /* thunder.json */,
+				84088D4A2860F9FD00B3942C /* windy.json */,
+			);
+			path = Lotties;
+			sourceTree = "<group>";
+		};
 		849CC37C28605E0400697534 = {
 			isa = PBXGroup;
 			children = (
+				84088D452860F2BA00B3942C /* Lotties */,
 				84DB761A2860F043009A9DFB /* View Controllers */,
 				84DB76192860F034009A9DFB /* API */,
 				849CC38728605E0400697534 /* Weatherly */,
@@ -168,6 +200,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				849CC39528605E0E00697534 /* LaunchScreen.storyboard in Resources */,
+				84088D502860F9FE00B3942C /* sunny.json in Resources */,
+				84088D4F2860F9FE00B3942C /* cloudy.json in Resources */,
+				84088D512860F9FE00B3942C /* thunder.json in Resources */,
+				84088D552860F9FE00B3942C /* heavy_rain.json in Resources */,
+				84088D4E2860F9FE00B3942C /* stormy.json in Resources */,
+				84088D542860F9FE00B3942C /* partly_cloudy.json in Resources */,
+				84088D522860F9FE00B3942C /* windy.json in Resources */,
+				84088D532860F9FE00B3942C /* light_snow.json in Resources */,
 				849CC39228605E0E00697534 /* Assets.xcassets in Resources */,
 				849CC39028605E0400697534 /* Main.storyboard in Resources */,
 			);
