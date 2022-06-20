@@ -10,6 +10,7 @@ import Lottie
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var searchField: UITextField!
     var animationView : AnimationView?
 
     override func viewDidLoad() {
@@ -22,13 +23,32 @@ class ViewController: UIViewController {
         animationView = .init(name: "thunder")
         animationView?.loopMode = .loop
         animationView?.frame = self.view.bounds
-        view.addSubview(animationView!)
+        view.insertSubview(animationView!, at: 0)
         animationView?.animationSpeed = 0.8
         animationView?.play()
         
         
+     
+        
+        
     }
-
-
+   
+    @IBAction func searchForLocation(_ sender: Any) {
+        
+        
+        if(self.searchField.text !=
+           ""){
+            print("Search for location:")
+            
+            let locationToSearch = self.searchField.text
+            
+            print(locationToSearch!)
+            
+        } else {
+            
+            print("Enter a location")
+        }
+    }
+    
 }
 
