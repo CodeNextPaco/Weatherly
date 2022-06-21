@@ -45,9 +45,7 @@ class ViewController: UIViewController {
             Task {
                 
                 self.location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
-                
-                print("Getting Location data ---->")
-                print(location)
+            
                 
                 self.outputLabel.text = """
                     Coordinates for: \( self.location.name )
@@ -55,12 +53,14 @@ class ViewController: UIViewController {
                     Lon: \(self.location.lon )
 
                     """
+                
+                fetchCurrentWeather(location: self.location)
                }
             
              
            // self.location.lon = location["lon"]
             
-            fetchWeather(location: self.location)
+            
             
         } else {
             
@@ -68,8 +68,22 @@ class ViewController: UIViewController {
         }
     } //end searchForLocation
     
-    func fetchWeather(location: Location){
+    func fetchCurrentWeather(location: Location){
+        print("Fetching Weather")
+        print(location)
         
+        Task{
+            
+            let currentWeather = await self.manager.fetchCurrentWeather(location: location)
+            
+            print()
+            
+             let desc = currentWeather.weather[0].description
+            let temp = String(currentWeather.main.temp)
+            
+            self.outputLabel.text = desc + "\n" + temp + " degrees F"
+            
+        }
         
         
     }

@@ -11,12 +11,13 @@ class APIManager: ObservableObject{
     
     static private let apiKey = "1495b6e70be9d92ba6cafc1c60e83bd6"
     
+   // var weatherResponse = WeatherResponse()
+    
     var locationDict : [String: Any] =  [:] //a dictionary will hold the location data
     
     var forecastDict : [String: Any] = [:] //a dictonary for the forecast
-    
     var location = Location()
- 
+
     func getLatLongFromTerm(term: String) async-> Location {
         
         do{
@@ -25,9 +26,9 @@ class APIManager: ObservableObject{
             let baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q="
             
             //limit to one result, set metric units (change to imperial if needed)
-            let searchString = baseUrl+term+"&units=metric&limit=1&appid=\(auth)"
+            let fetchString = baseUrl+term+"&units=metric&limit=1&appid=\(auth)"
             
-            guard let fetchUrl = URL(string: searchString) else { fatalError("Missing url")}
+            guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
             
             let urlRequest = URLRequest(url: fetchUrl)
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
@@ -51,7 +52,7 @@ class APIManager: ObservableObject{
             
         } catch  let err {
             
-            print("API failed: \(err)")
+            print("Location fetch failed: \(err)")
             
         }
         
@@ -59,22 +60,85 @@ class APIManager: ObservableObject{
         
     }
     
-    func getForecastFromLocation(location: Location) -> Dictionary<String,Any>{
+    func getForecastFromLocation(location: Location)  async -> Dictionary<String,Any>{
         
         do{
             
             let auth = APIManager.apiKey
             
+            let fetchString
+            = "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&units=metric&appid=\(auth)"
+            
+            print("URL String for fetching weather.....")
+            print(fetchString)
+            
+            guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
+            
+            let urlRequest = URLRequest(url: fetchUrl)
+            
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            
+            let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
             
             
-        } catch{
+           let forecasts = dataDictionary["list"] as! [[String: Any]]
+            
+           // print(dataDictionary["list"] )
+            
+            for forecast in forecasts{
+                print("Forecast datetime: ")
+                print(forecast["dt_txt"] as Any)
+
+            }
             
             
+        } catch let err{
+            
+            print("Forecast fetch failed: \(err)")
             
         }
         
         return self.forecastDict
         
+    }
+    
+    func fetchCurrentWeather(location: Location) async -> WeatherDaily {
+        
+        var currentWeather = WeatherDaily()
+        
+        
+        do{
+            
+            let auth = APIManager.apiKey
+            
+            let fetchString
+            = "https://api.openweathermap.org/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&units=imperial&appid=\(auth)"
+            
+            print("URL String for fetching weather.....")
+            print(fetchString)
+            
+            guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
+            
+            let urlRequest = URLRequest(url: fetchUrl)
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Could not fetch data")}
+        
+            let decoder = JSONDecoder()
+           
+            let decoderData = try decoder.decode(WeatherDaily.self, from: data)
+            
+            currentWeather = decoderData
+            
+            
+            
+            
+        } catch let err{
+            
+            print("API: Get Current Weather failed - \(err)")
+            
+        }
+        return currentWeather
     }
     
     

@@ -9,13 +9,13 @@ import Foundation
 
 struct WeatherResponse: Codable {
     var current: Weather
-    var hourly: [Weather]
+   // var hourly: [Weather]
     var daily: [WeatherDaily]
     
     static func empty() -> WeatherResponse {
         return WeatherResponse(
             current: Weather(),
-            hourly: [Weather](repeating: Weather(), count: 24),
+           // hourly: [Weather](repeating: Weather(), count: 24),
             daily: [WeatherDaily](repeating: WeatherDaily(), count: 8)
         )
     }
@@ -27,6 +27,7 @@ struct Weather: Codable, Identifiable  {
     var temp: Double
     var feels_like: Double
     var pressure: Int
+    var main: WeatherMain
     var weather: [WeatherDetail]
     
     init() {
@@ -35,6 +36,7 @@ struct Weather: Codable, Identifiable  {
         feels_like = 0.0
         pressure = 0
         weather = []
+        main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0)
     }
     
 }
@@ -48,20 +50,18 @@ extension Weather {
 
 struct  WeatherDaily: Codable, Identifiable {
     var dt: Int
-    var temp_min: Double
-    var temp_max: Double
+    var main: WeatherMain
     var weather: [WeatherDetail]
     
     enum CodingKey: String {
         case dt
-    case temp
-    case weather
+        case main
+        case weather
     }
     
     init() {
         dt = 0
-        temp_min =  0.0
-        temp_max = 0.0
+        main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0)
         weather = [WeatherDetail(main: "", description: "", icon: "")]
     }
 }
@@ -70,6 +70,14 @@ extension WeatherDaily {
     var id: UUID {
         return UUID()
     }
+}
+
+struct WeatherMain: Codable{
+    var temp: Double
+    var temp_min: Double
+    var temp_max: Double
+
+    
 }
 
 struct WeatherDetail: Codable {
