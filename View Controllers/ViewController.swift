@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputLabel: UILabel!
     
     let manager = APIManager()
+    var location = Location()
     @IBOutlet weak var searchField: UITextField!
     var animationView : AnimationView?
 
@@ -32,39 +33,49 @@ class ViewController: UIViewController {
     }
    
     @IBAction func searchForLocation(_ sender: Any) {
-        
-        
+    
         if(self.searchField.text !=
            ""){
             print("Search for location:")
             
             let locationToSearch = self.searchField.text
-            
+    
             print(locationToSearch!)
             
             Task {
                 
-                
-                let location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
+                self.location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
                 
                 print("Getting Location data ---->")
                 print(location)
                 
                 self.outputLabel.text = """
-                    Coordinates for: \( location["name"] ?? "None found")
-                    Lat: \(location["lat"] ?? "None found"),
-                    Lon: \(location["lon"] ?? "None found")
+                    Coordinates for: \( self.location.name )
+                    Lat: \(self.location.lat ),
+                    Lon: \(self.location.lon )
 
                     """
-                
-                
-            }
+               }
+            
+             
+           // self.location.lon = location["lon"]
+            
+            fetchWeather(location: self.location)
             
         } else {
             
             print("Enter a location")
         }
+    } //end searchForLocation
+    
+    func fetchWeather(location: Location){
+        
+        
+        
     }
+    
+    
+    
     
 }
 

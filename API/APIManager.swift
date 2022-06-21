@@ -13,46 +13,30 @@ class APIManager: ObservableObject{
     
     var locationDict : [String: Any] =  [:] //a dictionary will hold the location data
     
+    var forecastDict : [String: Any] = [:] //a dictonary for the forecast
     
-    func getLatLongFromTerm(term: String) async-> Dictionary<String, Any> {
+    var location = Location()
+ 
+    func getLatLongFromTerm(term: String) async-> Location {
         
         do{
             
             let auth = APIManager.apiKey
-            
             let baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q="
             
-            
-            let searchString = baseUrl+term+"&limit=1&appid=\(auth)"
+            //limit to one result, set metric units (change to imperial if needed)
+            let searchString = baseUrl+term+"&units=metric&limit=1&appid=\(auth)"
             
             guard let fetchUrl = URL(string: searchString) else { fatalError("Missing url")}
             
             let urlRequest = URLRequest(url: fetchUrl)
-            
-            print(searchString)
-            
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
             
-          
-           print(response)
-            
-//            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-//                print("Didn't get a 200")
-//                print((response as? HTTPURLResponse)?.statusCode)
-//
-//                fatalError("Could not fetch data")
-//
-//            }
-            
-             
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Could not fetch data")}
             
             let decoder = JSONDecoder()
            
             let decoderData = try decoder.decode([Location].self, from: data)
-             
-            print(decoderData[0].name)
-            print(decoderData[0].lat)
-            print(decoderData[0].lon)
             
             self.locationDict = ["name" :decoderData[0].name ,
                                 "lat": decoderData[0].lat,
@@ -60,16 +44,10 @@ class APIManager: ObservableObject{
                                 "country": decoderData[0].country,
                                 ]
             
+            self.location = decoderData[0]
             
-            
-//            Location(name: decoderData[0].name,
-//                                            lat: decoderData[0].lat,
-//                                            lon: decoderData[0].lon,
-//                                            country: decoderData[0].country,
-//                                            state: decoderData[0].state)
-            
-            
-            //print(searchedLocation)
+            print("Location ******>")
+            print(self.location)
             
         } catch  let err {
             
@@ -77,7 +55,25 @@ class APIManager: ObservableObject{
             
         }
         
-        return  self.locationDict
+        return  self.location
+        
+    }
+    
+    func getForecastFromLocation(location: Location) -> Dictionary<String,Any>{
+        
+        do{
+            
+            let auth = APIManager.apiKey
+            
+            
+            
+        } catch{
+            
+            
+            
+        }
+        
+        return self.forecastDict
         
     }
     
