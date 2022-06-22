@@ -13,12 +13,12 @@ class APIManager: ObservableObject{
     
    // var weatherResponse = WeatherResponse()
     
-    var locationDict : [String: Any] =  [:] //a dictionary will hold the location data
-    
     var forecastDict : [String: Any] = [:] //a dictonary for the forecast
     var location = Location()
 
     func getLatLongFromTerm(term: String) async-> Location {
+        
+//        var locationDict : [String: Any] =  [:] //a dictionary will hold the location data
         
         do{
             
@@ -39,12 +39,12 @@ class APIManager: ObservableObject{
            
             let decoderData = try decoder.decode([Location].self, from: data)
             
-            self.locationDict = ["name" :decoderData[0].name ,
-                                "lat": decoderData[0].lat,
-                                "lon" : decoderData[0].lon,
-                                "country": decoderData[0].country,
-                                ]
-            
+//            locationDict = ["name" :decoderData[0].name ,
+//                                "lat": decoderData[0].lat,
+//                                "lon" : decoderData[0].lon,
+//                                "country": decoderData[0].country,
+//                                ]
+//
             self.location = decoderData[0]
             
             print("Location ******>")
