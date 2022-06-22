@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  Weather.swift
 //  Weatherly
 //
 //  Created by admin on 6/20/22.
@@ -8,10 +8,12 @@
 import UIKit
 import Lottie
 
-class ViewController: UIViewController {
+class WeatherVC: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outputLabel: UILabel!
     
+    @IBOutlet weak var lottieView: UIView!
     let manager = APIManager()
     var location = Location()
     @IBOutlet weak var searchField: UITextField!
@@ -25,8 +27,8 @@ class ViewController: UIViewController {
         //TESTING LOTTIE
         animationView = .init(name: "thunder")
         animationView?.loopMode = .loop
-        animationView?.frame = self.view.bounds
-        view.insertSubview(animationView!, at: 0)
+        animationView?.frame = lottieView.bounds
+        lottieView.insertSubview(animationView!, at: 0)
         animationView?.animationSpeed = 0.8
         animationView?.play()
         
@@ -46,7 +48,6 @@ class ViewController: UIViewController {
                 
                 self.location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
             
-                
                 self.outputLabel.text = """
                     Coordinates for: \( self.location.name )
                     Lat: \(self.location.lat ),
