@@ -3,6 +3,8 @@
 //  Weatherly
 //
 //  Created by admin on 6/20/22.
+
+//  openweather icons and description: https://openweathermap.org/weather-conditions
 //
 
 import UIKit
@@ -23,9 +25,41 @@ class WeatherVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+    
+        //default location: SF
         
-        //TESTING LOTTIE
-        animationView = .init(name: "thunder")
+        var defaultLocation = Location()
+        defaultLocation.lat = 37.7790262
+        defaultLocation.lon = -122.419906
+        fetchCurrentWeather(location: defaultLocation)
+        
+        
+    }
+    
+    
+    
+    func setLottie(condition: String){
+
+        //clear the previous lottie
+        for subview in lottieView.subviews{
+            subview.removeFromSuperview()
+        }
+        
+        switch condition {
+            
+            case "overcast clouds":  animationView = .init(name: "cloudy")
+            case "broken clouds": animationView = .init(name: "partly_cloudy")
+            case "scattered clouds": animationView = .init(name: "partly_cloudy")
+            case "few clouds": animationView = .init(name: "partly_cloudy")
+            case "clear sky": animationView = .init(name: "sunny")
+            case "snow": animationView = .init(name: "light_snow")
+            case "rain": animationView = .init(name: "heavy_rain")
+            
+        
+            default: animationView = .init(name: "sunny")
+        }
+        
+
         animationView?.loopMode = .loop
         animationView?.frame = lottieView.bounds
         lottieView.insertSubview(animationView!, at: 0)
@@ -40,29 +74,15 @@ class WeatherVC: UIViewController {
            ""){
             print("Search for location:")
             
-            let locationToSearch = self.searchField.text
-    
-            print(locationToSearch!)
             
             Task {
-                
+                var locationToSearch = self.searchField.text
+        
                 self.location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
-            
-                self.outputLabel.text = """
-                    Coordinates for: \( self.location.name )
-                    Lat: \(self.location.lat ),
-                    Lon: \(self.location.lon )
-
-                    """
                 
                 fetchCurrentWeather(location: self.location)
                }
-            
-             
-           // self.location.lon = location["lon"]
-            
-            
-            
+
         } else {
             
             print("Enter a location")
@@ -71,18 +91,43 @@ class WeatherVC: UIViewController {
     
     func fetchCurrentWeather(location: Location){
         print("Fetching Weather")
-        print(location)
+        print(location.name)
+        print(location.country)
         
         Task{
             
             let currentWeather = await self.manager.fetchCurrentWeather(location: location)
             
-            print()
-            
-             let desc = currentWeather.weather[0].description
+            print(currentWeather)
+             
+            let currentMain =  currentWeather.weather[0].main //current basic condition for lottie
+            let desc = currentWeather.weather[0].description
             let temp = String(currentWeather.main.temp)
+            let locName = currentWeather.name
+            let feels_like = String(currentWeather.main.feels_like)
+            let max = String(currentWeather.main.temp_max)
+            let min = String(currentWeather.main.temp_min)
+            let hum = String(currentWeather.main.humidity)
             
-            self.outputLabel.text = desc + "\n" + temp + " degrees F"
+            
+            setLottie(condition: desc)
+            
+            self.outputLabel.text = """
+                
+                Location: \(locName)
+                Conditions: \(desc)
+                Temp: \(temp) °F
+                Feels Like: \(feels_like)
+                
+                Low: \(min)
+                High: \(max)
+                Humidity: \(hum)
+                """
+                
+            
+                
+            
+            
             
         }
         

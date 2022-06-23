@@ -18,7 +18,8 @@ class APIManager: ObservableObject{
 
     func getLatLongFromTerm(term: String) async-> Location {
         
-//        var locationDict : [String: Any] =  [:] //a dictionary will hold the location data
+        //remove space from term for URL
+        let clearnTerm = term.replacingOccurrences(of: " ", with: "+")
         
         do{
             
@@ -26,7 +27,7 @@ class APIManager: ObservableObject{
             let baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q="
             
             //limit to one result, set metric units (change to imperial if needed)
-            let fetchString = baseUrl+term+"&units=metric&limit=1&appid=\(auth)"
+            let fetchString = baseUrl+clearnTerm+"&units=metric&limit=1&appid=\(auth)"
             
             guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
             
@@ -116,6 +117,7 @@ class APIManager: ObservableObject{
             
             print("URL String for fetching weather.....")
             print(fetchString)
+            
             
             guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
             

@@ -36,7 +36,7 @@ struct Weather: Codable, Identifiable  {
         feels_like = 0.0
         pressure = 0
         weather = []
-        main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0)
+        main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0, humidity:0.0, feels_like: 0.0)
     }
     
 }
@@ -52,16 +52,19 @@ struct  WeatherDaily: Codable, Identifiable {
     var dt: Int
     var main: WeatherMain
     var weather: [WeatherDetail]
+    var name: String
     
     enum CodingKey: String {
         case dt
         case main
         case weather
+        case name
     }
     
     init() {
         dt = 0
-        main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0)
+        name = ""
+        main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0, humidity:0.0, feels_like: 0.0)
         weather = [WeatherDetail(main: "", description: "", icon: "")]
     }
 }
@@ -76,6 +79,9 @@ struct WeatherMain: Codable{
     var temp: Double
     var temp_min: Double
     var temp_max: Double
+    var humidity: Double
+    var feels_like: Double
+
 
     
 }
