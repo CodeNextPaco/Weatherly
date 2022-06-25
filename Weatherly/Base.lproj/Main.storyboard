@@ -18,7 +18,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVk-mc-QAI">
                                 <rect key="frame" x="12" y="64" width="390" height="60"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Oakland, CA, US" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pMZ-pM-Mqm">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="San Francisco" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pMZ-pM-Mqm">
                                         <rect key="frame" x="0.0" y="0.0" width="310" height="60"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
@@ -53,26 +53,59 @@
                                                     <constraint firstAttribute="height" constant="350" id="10w-v3-rYJ"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7n-ek-icg">
-                                                <rect key="frame" x="12" y="394" width="390" height="160"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udV-nq-3nU" userLabel="CurrentWeatherView">
+                                                <rect key="frame" x="12" y="386" width="390" height="300"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1Ug-sa-AKZ">
+                                                        <rect key="frame" x="8" y="8" width="374" height="180"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="61" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bg-Nd-cf9">
+                                                                <rect key="frame" x="0.0" y="0.0" width="181" height="180"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="180" id="fGI-gc-1wL"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="60"/>
+                                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7n-ek-icg">
+                                                                <rect key="frame" x="193" y="0.0" width="181" height="180"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco, CA, US" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfS-yf-1GO">
+                                                        <rect key="frame" x="20" y="196" width="362" height="41"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="30"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.5587505062" green="0.86191768599999996" blue="0.98132258650000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="160" id="ET0-I8-49f"/>
+                                                    <constraint firstItem="1Ug-sa-AKZ" firstAttribute="leading" secondItem="udV-nq-3nU" secondAttribute="leading" constant="8" id="FQR-7b-MP4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1Ug-sa-AKZ" secondAttribute="trailing" constant="8" id="GWm-10-Sue"/>
+                                                    <constraint firstAttribute="height" constant="300" id="K67-7I-8A5"/>
+                                                    <constraint firstItem="1Ug-sa-AKZ" firstAttribute="top" secondItem="udV-nq-3nU" secondAttribute="top" constant="8" id="VO5-WJ-Afg"/>
+                                                    <constraint firstItem="EfS-yf-1GO" firstAttribute="trailing" secondItem="h7n-ek-icg" secondAttribute="trailing" id="bHi-UH-Lba"/>
+                                                    <constraint firstItem="EfS-yf-1GO" firstAttribute="top" secondItem="1Ug-sa-AKZ" secondAttribute="bottom" constant="8" id="vlW-RL-2Tu"/>
+                                                    <constraint firstItem="EfS-yf-1GO" firstAttribute="leading" secondItem="udV-nq-3nU" secondAttribute="leading" constant="20" id="ydP-OL-3eX"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="udV-nq-3nU" firstAttribute="top" secondItem="4ca-Bj-Dmw" secondAttribute="bottom" constant="16" id="3ee-1U-v48"/>
                                             <constraint firstItem="4ca-Bj-Dmw" firstAttribute="leading" secondItem="xAa-Wy-KO7" secondAttribute="leading" constant="12" id="BcN-b9-hTR"/>
                                             <constraint firstAttribute="height" constant="1200" id="L7z-fG-ct6"/>
                                             <constraint firstAttribute="trailing" secondItem="4ca-Bj-Dmw" secondAttribute="trailing" constant="12" id="WSk-pG-sAM"/>
                                             <constraint firstItem="4ca-Bj-Dmw" firstAttribute="top" secondItem="xAa-Wy-KO7" secondAttribute="top" constant="20" id="dxq-bj-DRa"/>
-                                            <constraint firstItem="h7n-ek-icg" firstAttribute="top" secondItem="4ca-Bj-Dmw" secondAttribute="bottom" constant="24" id="hXo-hO-eth"/>
-                                            <constraint firstItem="h7n-ek-icg" firstAttribute="centerX" secondItem="xAa-Wy-KO7" secondAttribute="centerX" id="kvE-BK-4DO"/>
-                                            <constraint firstItem="h7n-ek-icg" firstAttribute="width" secondItem="4ca-Bj-Dmw" secondAttribute="width" id="vmR-Lf-aWT"/>
+                                            <constraint firstItem="udV-nq-3nU" firstAttribute="trailing" secondItem="4ca-Bj-Dmw" secondAttribute="trailing" id="ha3-sh-uY3"/>
+                                            <constraint firstItem="udV-nq-3nU" firstAttribute="leading" secondItem="4ca-Bj-Dmw" secondAttribute="leading" id="rbp-nX-hBE"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -99,10 +132,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="locationLabel" destination="EfS-yf-1GO" id="SX6-IP-cU9"/>
                         <outlet property="lottieView" destination="4ca-Bj-Dmw" id="cYh-44-T3V"/>
                         <outlet property="outputLabel" destination="h7n-ek-icg" id="F53-mf-Gxg"/>
                         <outlet property="scrollView" destination="zpp-kq-gOP" id="jPW-3b-4VQ"/>
                         <outlet property="searchField" destination="pMZ-pM-Mqm" id="MkV-z5-Crx"/>
+                        <outlet property="tempNowLabel" destination="3bg-Nd-cf9" id="Yxa-6e-zpP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

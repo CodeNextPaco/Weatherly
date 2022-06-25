@@ -12,6 +12,8 @@ import Lottie
 
 class WeatherVC: UIViewController {
     
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var tempNowLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outputLabel: UILabel!
     
@@ -102,7 +104,7 @@ class WeatherVC: UIViewController {
              
             let currentMain =  currentWeather.weather[0].main //current basic condition for lottie
             let desc = currentWeather.weather[0].description
-            let temp = String(currentWeather.main.temp)
+            let temp = String(format: "%.0f", currentWeather.main.temp)
             let locName = currentWeather.name
             let feels_like = String(currentWeather.main.feels_like)
             let max = String(currentWeather.main.temp_max)
@@ -110,15 +112,16 @@ class WeatherVC: UIViewController {
             let hum = String(currentWeather.main.humidity)
             
             
+            
             setLottie(condition: desc)
+            
+            self.tempNowLabel.text = "\(temp)°F"
+            self.locationLabel.text = "\(self.location.name) \(self.location.country)"
             
             self.outputLabel.text = """
                 
-                Location: \(locName)
-                Conditions: \(desc)
-                Temp: \(temp) °F
-                Feels Like: \(feels_like)
-                
+                \(desc)
+                Feels Like \(feels_like)
                 Low: \(min)
                 High: \(max)
                 Humidity: \(hum)

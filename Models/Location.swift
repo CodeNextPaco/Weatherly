@@ -25,9 +25,9 @@ struct Location: Decodable{
         state = ""
     }
     
-    static func getLocation() -> Location{
-        
-        return Location()
-    }
+//    static func getLocation() -> Location{
+//
+//        return Location()
+//    }
     
 }
