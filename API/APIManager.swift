@@ -61,7 +61,9 @@ class APIManager: ObservableObject{
         
     }
     
-    func getForecastFromLocation(location: Location)  async -> Dictionary<String,Any>{
+    func getForecastFromLocation(location: Location)  async -> [WeatherCurrent]{
+        
+        var weatherForcast = [WeatherCurrent]()
         
         do{
             
@@ -79,18 +81,26 @@ class APIManager: ObservableObject{
             
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
             
-            let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+           // self.forecastDict = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
             
             
-           let forecasts = dataDictionary["list"] as! [[String: Any]]
+            let decoder = JSONDecoder()
+           
+            let decoderData = try decoder.decode([WeatherCurrent].self, from: data)
+            
+            weatherForcast = decoderData
+            
+          // let forecasts = dataDictionary["list"] as! [[String: Any]]
             
            // print(dataDictionary["list"] )
             
-            for forecast in forecasts{
-                print("Forecast datetime: ")
-                print(forecast["dt_txt"] as Any)
-
-            }
+//            for forecast in forecasts{
+//                print("Forecast datetime: ")
+//                print(forecast["dt_txt"] as Any)
+//
+//            }
+            
+            
             
             
         } catch let err{
@@ -99,13 +109,13 @@ class APIManager: ObservableObject{
             
         }
         
-        return self.forecastDict
-        
+       // return self.forecastDict
+        return weatherForcast
     }
     
-    func fetchCurrentWeather(location: Location) async -> WeatherDaily {
+    func fetchCurrentWeather(location: Location) async -> WeatherCurrent {
         
-        var currentWeather = WeatherDaily()
+        var currentWeather = WeatherCurrent()
         
         
         do{
@@ -128,10 +138,12 @@ class APIManager: ObservableObject{
         
             let decoder = JSONDecoder()
            
-            let decoderData = try decoder.decode(WeatherDaily.self, from: data)
+            let decoderData = try decoder.decode(WeatherCurrent.self, from: data)
             
             currentWeather = decoderData
             
+            print("************* fetchCurrentWeather  *******************")
+            print(currentWeather)
             
             
             

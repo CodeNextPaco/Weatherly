@@ -10,18 +10,22 @@
 import UIKit
 import Lottie
 
-class WeatherVC: UIViewController {
+class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var tempNowLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outputLabel: UILabel!
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lottieView: UIView!
     let manager = APIManager()
     var location = Location()
     @IBOutlet weak var searchField: UITextField!
     var animationView : AnimationView?
+    
+    var forecasts = [WeatherCurrent]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,18 @@ class WeatherVC: UIViewController {
         
         
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
+        
+        
+        return cell
+    }
+    
     
     
     
@@ -83,6 +99,7 @@ class WeatherVC: UIViewController {
                 self.location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
                 
                 fetchCurrentWeather(location: self.location)
+                fetchForecast(location: self.location)
                }
 
         } else {
@@ -93,8 +110,6 @@ class WeatherVC: UIViewController {
     
     func fetchCurrentWeather(location: Location){
         print("Fetching Weather")
-        print(location.name)
-        print(location.country)
         
         Task{
             
@@ -111,8 +126,6 @@ class WeatherVC: UIViewController {
             let min = String(currentWeather.main.temp_min)
             let hum = String(currentWeather.main.humidity)
             
-            
-            
             setLottie(condition: desc)
             
             self.tempNowLabel.text = "\(temp)°F"
@@ -126,19 +139,47 @@ class WeatherVC: UIViewController {
                 High: \(max)
                 Humidity: \(hum)
                 """
-                
-            
-                
-            
-            
+
             
         }
-        
-        
+    
     }
     
-    
-    
-    
+    func fetchForecast(location: Location){
+        
+        Task{
+            
+            
+            self.forecasts = await manager.getForecastFromLocation(location: location)
+            
+            
+            
+            
+            print("<<<<<<<< forecast >>>>>>>")
+            
+            print(self.forecasts)
+           // print(forecastDict["list"]!)
+            
+//             let forecasts = self.forecastDict["list"] as! [[String: Any]]
+//
+//             // print(dataDictionary["list"] )
+//
+//              for forecast in forecasts{
+//                  print("Forecast datetime: ")
+//                  //print(forecast["main"] as Any)
+//
+//                  let mainForecasts = forecast["main"] as Any?
+//
+//                  for main in mainForecasts {
+//
+//                      print(main["temp"])
+//                  }
+                  
+  
+              
+            
+        }
+    }
+
 }
 

@@ -10,13 +10,13 @@ import Foundation
 //struct WeatherResponse: Codable {
 //    var current: Weather
 //   // var hourly: [Weather]
-//    var daily: [WeatherDaily]
+//    var daily: [WeatherCurrent]
 //
 //    static func empty() -> WeatherResponse {
 //        return WeatherResponse(
 //            current: Weather(),
 //           // hourly: [Weather](repeating: Weather(), count: 24),
-//            daily: [WeatherDaily](repeating: WeatherDaily(), count: 8)
+//            daily: [WeatherCurrent](repeating: WeatherCurrent(), count: 8)
 //        )
 //    }
 //}
@@ -48,7 +48,9 @@ import Foundation
 //    }
 //}
 
-struct  WeatherDaily: Codable, Identifiable {
+
+
+struct  WeatherCurrent: Codable, Identifiable {
     var dt: Int
     var main: WeatherMain
     var weather: [WeatherDetail]
@@ -69,7 +71,7 @@ struct  WeatherDaily: Codable, Identifiable {
     }
 }
 
-extension WeatherDaily {
+extension WeatherCurrent {
     var id: UUID {
         return UUID()
     }
@@ -81,8 +83,6 @@ struct WeatherMain: Codable{
     var temp_max: Double
     var humidity: Double
     var feels_like: Double
-
-
     
 }
 
