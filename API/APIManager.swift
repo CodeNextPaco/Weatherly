@@ -39,13 +39,7 @@ class APIManager: ObservableObject{
             let decoder = JSONDecoder()
            
             let decoderData = try decoder.decode([Location].self, from: data)
-            
-//            locationDict = ["name" :decoderData[0].name ,
-//                                "lat": decoderData[0].lat,
-//                                "lon" : decoderData[0].lon,
-//                                "country": decoderData[0].country,
-//                                ]
-//
+
             self.location = decoderData[0]
             
             print("Location ******>")
@@ -71,7 +65,7 @@ class APIManager: ObservableObject{
             let auth = APIManager.apiKey
             
             let fetchString
-            = "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&units=metric&appid=\(auth)"
+            = "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&units=imperial&appid=\(auth)"
             
             print("URL String for fetching weather.....")
             print(fetchString)
@@ -81,28 +75,14 @@ class APIManager: ObservableObject{
             let urlRequest = URLRequest(url: fetchUrl)
             
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            
-           // self.forecastDict = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-            
+               
             
             let decoder = JSONDecoder()
            
             let decoderData = try decoder.decode(WeatherForecast.self, from: data)
             
             weatherForcast = decoderData
-            
-          // let forecasts = dataDictionary["list"] as! [[String: Any]]
-            
-           // print(dataDictionary["list"] )
-            
-//            for forecast in forecasts{
-//                print("Forecast datetime: ")
-//                print(forecast["dt_txt"] as Any)
-//
-//            }
-            
-            
-            
+       
             
         } catch let err{
             
@@ -110,7 +90,7 @@ class APIManager: ObservableObject{
             
         }
         
-       // return self.forecastDict
+
         return weatherForcast
     }
     

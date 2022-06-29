@@ -52,10 +52,16 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
         
-        let cellTemp = String(self.forecasts.list[indexPath.row].main.temp)
+        let cellTemp = String(format: "%.0f", self.forecasts.list[indexPath.row].main.temp) + "°F"
         let dateTime = self.forecasts.list[indexPath.row].dt_txt!
         
         cell.cellTempLabel.text = cellTemp + " " + dateTime
+        
+        let iconString = self.forecasts.list[indexPath.row].weather[0].icon
+        let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
+        print("ICON: \(iconURL)" )
+        cell.weatherIcon.loadurl(url: iconURL)
+        
         return cell
     }
     
@@ -158,41 +164,43 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             self.forecasts = await manager.getForecastFromLocation(location: location)
         
-            
-           
-            
-            //print(self.forecasts)
-            //print(self.forecasts.list)
-            
+
             for forecast in self.forecasts.list{
                 print("<<<<<<<< forecast >>>>>>>")
                 print(forecast.dt_txt)
                 print(forecast.weather)
                 print(forecast.pop)
-                print(forecast.main.temp)
+                print(String(format: "%.0f", forecast.main.temp)+"°F")
                 
+                let dateString = forecast.dt_txt!
                 
+               //testing date
+                
+                 
                 
             }
             
             tableView.reloadData()
      
-//              for forecast in forecasts{
-//                  print("Forecast datetime: ")
-//                  //print(forecast["main"] as Any)
-//
-//                  let mainForecasts = forecast["main"] as Any?
-//
-//                  for main in mainForecasts {
-//
-//                      print(main["temp"])
-//                  }
-                  
-  
-              
+            
             
         }
     }
 
+}
+
+extension UIImageView {
+    func loadurl(url: URL) {
+
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }
 
