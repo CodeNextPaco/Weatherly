@@ -61,9 +61,10 @@ class APIManager: ObservableObject{
         
     }
     
-    func getForecastFromLocation(location: Location)  async -> [WeatherCurrent]{
+    func getForecastFromLocation(location: Location)  async -> WeatherForecast{
+        //see docs: https://openweathermap.org/forecast5
         
-        var weatherForcast = [WeatherCurrent]()
+        var weatherForcast = WeatherForecast()
         
         do{
             
@@ -86,7 +87,7 @@ class APIManager: ObservableObject{
             
             let decoder = JSONDecoder()
            
-            let decoderData = try decoder.decode([WeatherCurrent].self, from: data)
+            let decoderData = try decoder.decode(WeatherForecast.self, from: data)
             
             weatherForcast = decoderData
             
@@ -115,6 +116,8 @@ class APIManager: ObservableObject{
     
     func fetchCurrentWeather(location: Location) async -> WeatherCurrent {
         
+        // see docs : https://openweathermap.org/current
+        
         var currentWeather = WeatherCurrent()
         
         
@@ -127,8 +130,7 @@ class APIManager: ObservableObject{
             
             print("URL String for fetching weather.....")
             print(fetchString)
-            
-            
+  
             guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
             
             let urlRequest = URLRequest(url: fetchUrl)

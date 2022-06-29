@@ -25,12 +25,14 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var searchField: UITextField!
     var animationView : AnimationView?
     
-    var forecasts = [WeatherCurrent]()
+    var forecasts = WeatherForecast()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        tableView.delegate = self
+        tableView.dataSource = self
     
         //default location: SF
         
@@ -43,13 +45,17 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        
+        return self.forecasts.list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
         
+        let cellTemp = String(self.forecasts.list[indexPath.row].main.temp)
+        let dateTime = self.forecasts.list[indexPath.row].dt_txt!
         
+        cell.cellTempLabel.text = cellTemp + " " + dateTime
         return cell
     }
     
@@ -151,19 +157,26 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             
             self.forecasts = await manager.getForecastFromLocation(location: location)
+        
             
+           
             
+            //print(self.forecasts)
+            //print(self.forecasts.list)
             
+            for forecast in self.forecasts.list{
+                print("<<<<<<<< forecast >>>>>>>")
+                print(forecast.dt_txt)
+                print(forecast.weather)
+                print(forecast.pop)
+                print(forecast.main.temp)
+                
+                
+                
+            }
             
-            print("<<<<<<<< forecast >>>>>>>")
-            
-            print(self.forecasts)
-           // print(forecastDict["list"]!)
-            
-//             let forecasts = self.forecastDict["list"] as! [[String: Any]]
-//
-//             // print(dataDictionary["list"] )
-//
+            tableView.reloadData()
+     
 //              for forecast in forecasts{
 //                  print("Forecast datetime: ")
 //                  //print(forecast["main"] as Any)
