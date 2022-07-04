@@ -46,6 +46,25 @@ struct  WeatherCurrent: Codable {
         main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0, humidity:0.0, feels_like: 0.0)
         weather = [WeatherDetail(main: "", description: "", icon: "")]
     }
+    
+    func getFormattedDateTime() -> String {
+        guard let dt_txt = dt_txt else {
+            print("Error: DateTime property does not exist")
+            return "Error: Weather.WeatherCurrent.getFormattedDateTime()" // NOTE: Have not learned error handling and throws yet.
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = dateFormatter.date(from: dt_txt) else {
+            print("Error: DateTime Format in \(dt_txt) could not be parsed")
+            return "Error: Weather.WeatherCurrent.getFormattedDateTime()"
+        }
+        
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .short
+        
+        return dateFormatter.string(from: date)
+    }
 }
 
 

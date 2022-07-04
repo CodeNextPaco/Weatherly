@@ -53,7 +53,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
         
         let cellTemp = String(format: "%.0f", self.forecasts.list[indexPath.row].main.temp) + "°F"
-        let dateTime = self.forecasts.list[indexPath.row].dt_txt!
+        let dateTime = self.forecasts.list[indexPath.row].getFormattedDateTime()
         
         cell.cellTempLabel.text = cellTemp + " " + dateTime
         
