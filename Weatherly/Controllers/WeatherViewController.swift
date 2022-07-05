@@ -143,12 +143,12 @@ class WeatherViewController: UIViewController {
 
             for forecast in self.forecasts.list{
                 print("<<<<<<<< forecast >>>>>>>")
-                print(forecast.dt_txt)
+                print(forecast.dt)
                 print(forecast.weather)
                 print(forecast.pop)
                 print(String(format: "%.0f", forecast.main.temp)+"°F")
                 
-                let dateString = forecast.dt_txt!
+//                let dateString = forecast.dt!
                 
                //testing date
                 
@@ -181,7 +181,7 @@ extension WeatherViewController: UITableViewDataSource {
        let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
        
        let cellTemp = String(format: "%.0f", self.forecasts.list[indexPath.row].main.temp) + "°F"
-       let dateTime = self.forecasts.list[indexPath.row].getFormattedDateTime()
+       let dateTime = self.forecasts.list[indexPath.row].formattedDate()
        
        cell.cellTempLabel.text = cellTemp + " " + dateTime
        

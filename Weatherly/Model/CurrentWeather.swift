@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WeatherCurrent: Codable {
+struct CurrentWeather {
     var main: WeatherMain
     var weather: [WeatherDetail]
     var name: String?
@@ -27,7 +27,7 @@ struct WeatherCurrent: Codable {
     }
 }
 
-extension WeatherCurrent {
+extension CurrentWeather: Codable {
     struct WeatherMain: Codable {
         var temp: Double
         var temp_min: Double

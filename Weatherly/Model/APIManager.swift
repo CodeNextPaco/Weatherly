@@ -21,7 +21,7 @@ class APIManager: ObservableObject{
         //remove space from term for URL
         let clearnTerm = term.replacingOccurrences(of: " ", with: "+")
         
-        do{
+        do {
             
             let auth = APIManager.apiKey
             let baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q="
@@ -94,11 +94,11 @@ class APIManager: ObservableObject{
         return weatherForcast
     }
     
-    func fetchCurrentWeather(location: Location) async -> WeatherCurrent {
+    func fetchCurrentWeather(location: Location) async -> CurrentWeather {
         
         // see docs : https://openweathermap.org/current
         
-        var currentWeather = WeatherCurrent()
+        var currentWeather = CurrentWeather()
         
         
         do{
@@ -120,7 +120,7 @@ class APIManager: ObservableObject{
         
             let decoder = JSONDecoder()
            
-            let decoderData = try decoder.decode(WeatherCurrent.self, from: data)
+            let decoderData = try decoder.decode(CurrentWeather.self, from: data)
             
             currentWeather = decoderData
             
