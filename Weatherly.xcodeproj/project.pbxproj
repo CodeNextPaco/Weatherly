@@ -76,6 +76,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		655BD2C72873FBB40033EE5F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				846B6ECD2867B20600CEAB82 /* WeatherCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		84088D452860F2BA00B3942C /* Lotties */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,32 +99,28 @@
 			path = Lotties;
 			sourceTree = "<group>";
 		};
-		84088D582861199D00B3942C /* Models */ = {
+		84088D582861199D00B3942C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84088D562861126000B3942C /* APIManager.swift */,
 				84088D59286119BE00B3942C /* Location.swift */,
 				84088D5D28618BFC00B3942C /* Weather.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		846B6ECC2867B1DB00CEAB82 /* Views */ = {
+		846B6ECC2867B1DB00CEAB82 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				846B6ECD2867B20600CEAB82 /* WeatherCell.swift */,
+				655BD2C72873FBB40033EE5F /* Cells */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		849CC37C28605E0400697534 = {
 			isa = PBXGroup;
 			children = (
-				84088D452860F2BA00B3942C /* Lotties */,
-				846B6ECC2867B1DB00CEAB82 /* Views */,
-				84DB761A2860F043009A9DFB /* View Controllers */,
-				84DB76192860F034009A9DFB /* API */,
 				849CC38728605E0400697534 /* Weatherly */,
-				84088D582861199D00B3942C /* Models */,
 				849CC38628605E0400697534 /* Products */,
 				8B63B24D5B19903A95B4ECD2 /* Pods */,
 				494B4320B69DAC761A7586C3 /* Frameworks */,
@@ -141,24 +145,20 @@
 				849CC39328605E0E00697534 /* LaunchScreen.storyboard */,
 				849CC39628605E0E00697534 /* Info.plist */,
 				655BD2C42873D9C90033EE5F /* Constants.swift */,
+				84088D452860F2BA00B3942C /* Lotties */,
+				846B6ECC2867B1DB00CEAB82 /* View */,
+				84088D582861199D00B3942C /* Model */,
+				84DB761A2860F043009A9DFB /* Controllers */,
 			);
 			path = Weatherly;
 			sourceTree = "<group>";
 		};
-		84DB76192860F034009A9DFB /* API */ = {
-			isa = PBXGroup;
-			children = (
-				84088D562861126000B3942C /* APIManager.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		84DB761A2860F043009A9DFB /* View Controllers */ = {
+		84DB761A2860F043009A9DFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				849CC38C28605E0400697534 /* WeatherViewController.swift */,
 			);
-			path = "View Controllers";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		8B63B24D5B19903A95B4ECD2 /* Pods */ = {
