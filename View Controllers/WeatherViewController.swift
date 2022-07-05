@@ -10,7 +10,7 @@
 import UIKit
 import Lottie
 
-class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var locationLabel: UILabel!
