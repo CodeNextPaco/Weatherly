@@ -10,7 +10,7 @@
 import UIKit
 import Lottie
 
-class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WeatherViewController: UIViewController {
     
     
     @IBOutlet weak var locationLabel: UILabel!
@@ -43,30 +43,6 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.forecasts.list.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
-        
-        let cellTemp = String(format: "%.0f", self.forecasts.list[indexPath.row].main.temp) + "°F"
-        let dateTime = self.forecasts.list[indexPath.row].getFormattedDateTime()
-        
-        cell.cellTempLabel.text = cellTemp + " " + dateTime
-        
-        let iconString = self.forecasts.list[indexPath.row].weather[0].icon
-        let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
-        print("ICON: \(iconURL)" )
-        cell.weatherIcon.loadurl(url: iconURL)
-        
-        return cell
-    }
-    
-    
-    
     
     func setLottie(condition: String){
 
@@ -187,6 +163,35 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
+}
+
+//
+// MARK: -Table View Delegate
+//
+extension WeatherViewController: UITableViewDelegate {}
+
+//
+// MARK: -Table View Data Source
+//
+extension WeatherViewController: UITableViewDataSource {
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return self.forecasts.list.count
+   }
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
+       
+       let cellTemp = String(format: "%.0f", self.forecasts.list[indexPath.row].main.temp) + "°F"
+       let dateTime = self.forecasts.list[indexPath.row].getFormattedDateTime()
+       
+       cell.cellTempLabel.text = cellTemp + " " + dateTime
+       
+       let iconString = self.forecasts.list[indexPath.row].weather[0].icon
+       let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
+       print("ICON: \(iconURL)" )
+       cell.weatherIcon.loadurl(url: iconURL)
+       
+       return cell
+   }
 }
 
 extension UIImageView {
