@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum NetworkError: Error {
+  case requestError
+  case parseError
+  case invalidUrl
+  case dateParseError
+}

@@ -13,35 +13,34 @@ import Lottie
 class WeatherViewController: UIViewController {
     
     
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var tempNowLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var outputLabel: UILabel!
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var lottieView: UIView!
-    let manager = APIManager()
-    var location = Location()
-    @IBOutlet weak var searchField: UITextField!
-    var animationView : AnimationView?
-    
-    var forecasts = WeatherForecast()
+  @IBOutlet weak var locationLabel: UILabel!
+  @IBOutlet weak var tempNowLabel: UILabel!
+  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet weak var outputLabel: UILabel!
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var lottieView: UIView!
+  @IBOutlet weak var searchField: UITextField!
+  var animationView : AnimationView?
 
+  var weatherManager = WeatherManager()
+  
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-    
-        //default location: SF
-        
-        var defaultLocation = Location()
-        defaultLocation.lat = 37.7790262
-        defaultLocation.lon = -122.419906
-        fetchCurrentWeather(location: defaultLocation)
-        
-        
+      super.viewDidLoad()
+      // Do any additional setup after loading the view.
+      
+      tableView.delegate = self
+      tableView.dataSource = self
+  
+      //default location: SF
+      
+      var defaultLocation = Location()
+      defaultLocation.name = "San Francisco"
+      defaultLocation.country = "US"
+      defaultLocation.lat = 37.7790262
+      defaultLocation.lon = -122.419906
+      weatherManager.fetchCurrentWeather(from: defaultLocation) {
+        self.updateUI()
+      }
     }
     
     func setLottie(condition: String){
@@ -76,93 +75,41 @@ class WeatherViewController: UIViewController {
    
     @IBAction func searchForLocation(_ sender: Any) {
     
-        if(self.searchField.text !=
-           ""){
-            print("Search for location:")
-            
-            
-            Task {
-                var locationToSearch = self.searchField.text
-        
-                self.location = await self.manager.getLatLongFromTerm(term: locationToSearch!)
-                
-                fetchCurrentWeather(location: self.location)
-                fetchForecast(location: self.location)
-               }
-
-        } else {
-            
-            print("Enter a location")
+      if(!searchField.text!.isEmpty){
+        print("Search for location:")
+        self.weatherManager.fetchCurrentWeatherAndForecast(from: searchField.text!) {
+          self.updateUI()
+          self.tableView.reloadData()
         }
-    } //end searchForLocation
+      }
+    } 
     
-    func fetchCurrentWeather(location: Location){
-        print("Fetching Weather")
-        
-        Task{
-            
-            let currentWeather = await self.manager.fetchCurrentWeather(location: location)
-            
-            print(currentWeather)
-             
-            let currentMain =  currentWeather.weather[0].main //current basic condition for lottie
-            let desc = currentWeather.weather[0].description
-            let temp = String(format: "%.0f", currentWeather.main.temp)
-            let locName = currentWeather.name
-            let feels_like = String(currentWeather.main.feels_like)
-            let max = String(currentWeather.main.temp_max)
-            let min = String(currentWeather.main.temp_min)
-            let hum = String(currentWeather.main.humidity)
-            
-            setLottie(condition: desc)
-            
-            self.tempNowLabel.text = "\(temp)°F"
-            self.locationLabel.text = "\(self.location.name) \(self.location.country)"
-            
-            self.outputLabel.text = """
-                
-                \(desc)
-                Feels Like \(feels_like)
-                Low: \(min)
-                High: \(max)
-                Humidity: \(hum)
-                """
+    func updateUI() {
 
-            
-        }
-    
-    }
-    
-    func fetchForecast(location: Location){
+      let currentWeather = weatherManager.currentWeather
+      let currentMain =  currentWeather.weather[0].main //current basic condition for lottie
+      let desc = currentWeather.weather[0].description
+      let temp = String(format: "%.0f", currentWeather.main.temp)
+      let locName = currentWeather.name
+      let feels_like = String(currentWeather.main.feels_like)
+      let max = String(currentWeather.main.temp_max)
+      let min = String(currentWeather.main.temp_min)
+      let hum = String(currentWeather.main.humidity)
         
-        Task{
-            
-            
-            self.forecasts = await manager.getForecastFromLocation(location: location)
+      DispatchQueue.main.async {
+        self.setLottie(condition: desc)
+        self.tempNowLabel.text = "\(temp)°F"
+        self.locationLabel.text = "\(self.weatherManager.currentLocation.name) \(self.weatherManager.currentLocation.country)"
         
-
-            for forecast in self.forecasts.list{
-                print("<<<<<<<< forecast >>>>>>>")
-                print(forecast.dt)
-                print(forecast.weather)
-                print(forecast.pop)
-                print(String(format: "%.0f", forecast.main.temp)+"°F")
-                
-//                let dateString = forecast.dt!
-                
-               //testing date
-                
-                 
-                
-            }
-            
-            tableView.reloadData()
-     
-            
-            
-        }
-    }
-
+        self.outputLabel.text = """
+          \(desc)
+          Feels Like \(feels_like)
+          Low: \(min)
+          High: \(max)
+          Humidity: \(hum)
+          """
+      }
+  }
 }
 
 //
@@ -175,28 +122,28 @@ extension WeatherViewController: UITableViewDelegate {}
 //
 extension WeatherViewController: UITableViewDataSource {
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return self.forecasts.list.count
+     return self.weatherManager.weatherForecast.list.count
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
+     let cell = (tableView.dequeueReusableCell(withIdentifier: "weatherCell") as? WeatherCell)!
        
-       let cellTemp = String(format: "%.0f", self.forecasts.list[indexPath.row].main.temp) + "°F"
-       let dateTime = self.forecasts.list[indexPath.row].formattedDate()
+     let forecasts = self.weatherManager.weatherForecast.list
+     let cellTemp = String(format: "%.0f", forecasts[indexPath.row].main.temp) + "°F"
+     let dateTime = forecasts[indexPath.row].formattedDate()
        
-       cell.cellTempLabel.text = cellTemp + " " + dateTime
-       
-       let iconString = self.forecasts.list[indexPath.row].weather[0].icon
-       let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
-       print("ICON: \(iconURL)" )
-       cell.weatherIcon.loadurl(url: iconURL)
-       
-       return cell
+     cell.cellTempLabel.text = cellTemp + " " + dateTime
+     
+     let iconString = forecasts[indexPath.row].weather[0].icon
+     let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
+     print("ICON: \(iconURL)" )
+     cell.weatherIcon.loadurl(url: iconURL)
+     
+     return cell
    }
 }
 
 extension UIImageView {
     func loadurl(url: URL) {
-
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {

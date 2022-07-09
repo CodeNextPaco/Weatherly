@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-struct Location: Decodable{
+struct Location: Decodable {
     
     var name: String
     var lat: Double
@@ -17,17 +16,11 @@ struct Location: Decodable{
     var state: String?
     
     init(){
-        
         name = ""
         lat = 0.0
         lon = 0.0
         country = ""
         state = ""
     }
-    
-//    static func getLocation() -> Location{
-//
-//        return Location()
-//    }
-    
+
 }

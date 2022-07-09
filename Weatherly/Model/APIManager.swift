@@ -7,136 +7,68 @@
 
 import Foundation
 
-class APIManager: ObservableObject{
+class APIManager: ObservableObject {
     
-    static private let apiKey = "1495b6e70be9d92ba6cafc1c60e83bd6"
-    
-   // var weatherResponse = WeatherResponse()
-    
-    var forecastDict : [String: Any] = [:] //a dictonary for the forecast
-    var location = Location()
+  static private let apiKey = "1495b6e70be9d92ba6cafc1c60e83bd6"
 
-    func getLatLongFromTerm(term: String) async-> Location {
+  func getLocationFrom(query: String, completionHandler: @escaping (Location?, Error?) -> Void) {
         
-        //remove space from term for URL
-        let clearnTerm = term.replacingOccurrences(of: " ", with: "+")
-        
-        do {
-            
-            let auth = APIManager.apiKey
-            let baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q="
-            
-            //limit to one result, set metric units (change to imperial if needed)
-            let fetchString = baseUrl+clearnTerm+"&units=metric&limit=1&appid=\(auth)"
-            
-            guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
-            
-            let urlRequest = URLRequest(url: fetchUrl)
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Could not fetch data")}
-            
-            let decoder = JSONDecoder()
-           
-            let decoderData = try decoder.decode([Location].self, from: data)
-
-            self.location = decoderData[0]
-            
-            print("Location ******>")
-            print(self.location)
-            
-        } catch  let err {
-            
-            print("Location fetch failed: \(err)")
-            
-        }
-        
-        return  self.location
-        
+    //remove space from term for URL
+    let clearnTerm = query.replacingOccurrences(of: " ", with: "+")
+    let auth = APIManager.apiKey
+    let baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q="
+    
+    //limit to one result, set metric units (change to imperial if needed)
+    let fetchString = baseUrl+clearnTerm+"&units=metric&limit=1&appid=\(auth)"
+    Network.loadJSONFile(from: fetchString, type: [Location].self) { locationSearchResult, error in
+      guard error == nil, locationSearchResult != nil else {
+        completionHandler(nil, error)
+        return
+      }
+      completionHandler(locationSearchResult?.first, nil)
     }
+  }
     
-    func getForecastFromLocation(location: Location)  async -> WeatherForecast{
+  func getForecast(from location: Location, completionHandler: @escaping (WeatherForecast?, Error?) -> Void) {
         //see docs: https://openweathermap.org/forecast5
         
-        var weatherForcast = WeatherForecast()
-        
-        do{
-            
-            let auth = APIManager.apiKey
-            
-            let fetchString
-            = "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\(location.lon)&units=imperial&appid=\(auth)"
-            
-            print("URL String for fetching weather.....")
-            print(fetchString)
-            
-            guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
-            
-            let urlRequest = URLRequest(url: fetchUrl)
-            
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-               
-            
-            let decoder = JSONDecoder()
-           
-            let decoderData = try decoder.decode(WeatherForecast.self, from: data)
-            
-            weatherForcast = decoderData
-       
-            
-        } catch let err{
-            
-            print("Forecast fetch failed: \(err)")
-            
-        }
-        
-
-        return weatherForcast
-    }
+    let auth = APIManager.apiKey
     
-    func fetchCurrentWeather(location: Location) async -> CurrentWeather {
-        
-        // see docs : https://openweathermap.org/current
-        
-        var currentWeather = CurrentWeather()
-        
-        
-        do{
-            
-            let auth = APIManager.apiKey
-            
-            let fetchString
-            = "https://api.openweathermap.org/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&units=imperial&appid=\(auth)"
-            
-            print("URL String for fetching weather.....")
-            print(fetchString)
-  
-            guard let fetchUrl = URL(string: fetchString) else { fatalError("Missing url")}
-            
-            let urlRequest = URLRequest(url: fetchUrl)
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Could not fetch data")}
-        
-            let decoder = JSONDecoder()
-           
-            let decoderData = try decoder.decode(CurrentWeather.self, from: data)
-            
-            currentWeather = decoderData
-            
-            print("************* fetchCurrentWeather  *******************")
-            print(currentWeather)
-            
-            
-            
-        } catch let err{
-            
-            print("API: Get Current Weather failed - \(err)")
-            
-        }
-        return currentWeather
-    }
+    let fetchString
+    = "https://api.openweathermap.org/data/2.5/forecast?lat=\(location.lat)&lon=\( location.lon)&units=imperial&appid=\(auth)"
     
+    print("URL String for fetching weather.....")
+    print(fetchString)
+              
+    Network.loadJSONFile(from: fetchString, type: WeatherForecast.self) { weatherForecast, error in
+      guard error == nil else {
+        completionHandler(nil, error)
+        return
+      }
+      completionHandler(weatherForecast, nil)
+    }
+  }
+    
+  func fetchCurrentWeather(location: Location, completionHandler: @escaping (CurrentWeather?, Error?) -> Void) {
+        
+    // see docs : https://openweathermap.org/current
+            
+    let auth = APIManager.apiKey
+    
+    let fetchString
+    = "https://api.openweathermap.org/data/2.5/weather?lat=\(location.lat)&lon=\(location.lon)&units=imperial&appid=\(auth)"
+    
+    print("URL String for fetching weather.....")
+    print(fetchString)
+          
+    Network.loadJSONFile(from: fetchString, type: CurrentWeather.self) { currentWeather, error in
+      guard error == nil, currentWeather != nil else {
+        completionHandler(nil, error)
+        return
+      }
+      completionHandler(currentWeather, nil)
+    }
+  }
     
 }
 
