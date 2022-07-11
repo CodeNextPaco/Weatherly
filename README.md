@@ -6,7 +6,7 @@ This app uses the [Open Weather API](https://openweathermap.org/)
 It is a work in progress. See numbered branches for steps used to build the app. 
 
 TODOs: 
-1. Format the Table view content further so it renders the correct time in local format (not UTC)
+1. ~~Format the Table view content further so it renders the correct time in local format (not UTC)~~
 2. Add a detail screen for extended forecast (currently table view has all 5 day, forecast objects every 3 hours)
 3. Calculate the real Daily High and Low (currently showing the temp_max and temp_min for a current location, not daily)
 4. Validate location: fix app crash when mispelled or non-existent locatioin is entered in search bar.
