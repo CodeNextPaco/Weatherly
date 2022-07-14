@@ -13,7 +13,6 @@ import Nuke
 
 class WeatherViewController: UIViewController {
     
-    
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var tempNowLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -21,7 +20,9 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lottieView: UIView!
     @IBOutlet weak var searchField: UITextField!
-  
+    @IBOutlet weak var tempHighLabel: UILabel!
+    @IBOutlet weak var tempLowLabel: UILabel!
+    
     var animationView : AnimationView?
     var weatherManager = WeatherManager()
   
@@ -53,13 +54,11 @@ class WeatherViewController: UIViewController {
             default: animationView = .init(name: "sunny")
         }
         
-
         animationView?.loopMode = .loop
         animationView?.frame = lottieView.bounds
         lottieView.insertSubview(animationView!, at: 0)
         animationView?.animationSpeed = 0.8
         animationView?.play()
-        
     }
    
     @IBAction func searchForLocation(_ sender: Any) {
@@ -78,24 +77,18 @@ class WeatherViewController: UIViewController {
         let currentMain =  currentWeather.weather[0].main //current basic condition for lottie
         let desc = currentWeather.weather[0].description
         let temp = String(format: "%.0f", currentWeather.main.temp)
-        let locName = currentWeather.name
         let feels_like = String(currentWeather.main.feels_like)
-        let max = String(currentWeather.main.temp_max)
-        let min = String(currentWeather.main.temp_min)
+        let max = "\(Int(currentWeather.main.temp_max))°"
+        let min = "\(Int(currentWeather.main.temp_min))°"
         let hum = String(currentWeather.main.humidity)
         
         DispatchQueue.main.async {
             self.setLottie(condition: desc)
             self.tempNowLabel.text = "\(temp)°F"
-            self.locationLabel.text = "\(self.weatherManager.currentLocation.name) \(self.weatherManager.currentLocation.country)"
-
-            self.outputLabel.text = """
-            \(desc)
-            Feels Like \(feels_like)
-            Low: \(min)
-            High: \(max)
-            Humidity: \(hum)
-            """
+            self.locationLabel.text = "\(self.weatherManager.currentLocation.name)"
+            self.outputLabel.text = desc
+            self.tempLowLabel.text = min
+            self.tempHighLabel.text = max
             self.tableView.reloadData()
         }
     }
