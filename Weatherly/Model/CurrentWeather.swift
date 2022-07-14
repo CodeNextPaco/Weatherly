@@ -27,8 +27,8 @@ struct CurrentWeather {
     }
 }
 
-extension CurrentWeather: Codable {
-    struct WeatherMain: Codable {
+extension CurrentWeather: Decodable {
+    struct WeatherMain: Decodable {
         var temp: Double
         var temp_min: Double
         var temp_max: Double
@@ -36,18 +36,10 @@ extension CurrentWeather: Codable {
         var feels_like: Double
     }
     
-    struct WeatherDetail: Codable {
+    struct WeatherDetail: Decodable {
         var main: String
         var description: String
         var icon: String
-    }
-    
-    enum CodingKey: String {
-        case main
-        case weather
-        case name
-        case pop
-        case dt
     }
 }
 

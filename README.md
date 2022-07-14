@@ -18,3 +18,5 @@ TODOs:
 10. Build a Networking class to handle all the Network requests - move out of APIManager
 11. Add more icons for max, min temps, humidity, wind, etc.
 
+### Helpful Articles
+- [Raywenderlich intro article on NUKE](https://www.raywenderlich.com/11070743-nuke-tutorial-for-ios-getting-started) 

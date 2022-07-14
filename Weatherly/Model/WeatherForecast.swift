@@ -7,16 +7,10 @@
 
 import Foundation
 
-struct WeatherForecast {
+struct WeatherForecast: Decodable {
     var list: [CurrentWeather]
     
     init() {
         list = []
-    }
-}
-
-extension WeatherForecast: Codable {
-    enum CodingKey: String {
-        case list
     }
 }

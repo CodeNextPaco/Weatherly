@@ -13,6 +13,7 @@
 		655BD2CF287419420033EE5F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BD2CE287419420033EE5F /* Network.swift */; };
 		655BD2D12874194E0033EE5F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BD2D02874194E0033EE5F /* NetworkError.swift */; };
 		655BD2E7287C63210033EE5F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 655BD2E6287C63210033EE5F /* Lottie */; };
+		655BD2F02880172B0033EE5F /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 655BD2EF2880172B0033EE5F /* Nuke */; };
 		84088D4E2860F9FE00B3942C /* stormy.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D462860F9FD00B3942C /* stormy.json */; };
 		84088D4F2860F9FE00B3942C /* cloudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D472860F9FD00B3942C /* cloudy.json */; };
 		84088D502860F9FE00B3942C /* sunny.json in Resources */ = {isa = PBXBuildFile; fileRef = 84088D482860F9FD00B3942C /* sunny.json */; };
@@ -67,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				655BD2E7287C63210033EE5F /* Lottie in Frameworks */,
+				655BD2F02880172B0033EE5F /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +180,7 @@
 			name = Weatherly;
 			packageProductDependencies = (
 				655BD2E6287C63210033EE5F /* Lottie */,
+				655BD2EF2880172B0033EE5F /* Nuke */,
 			);
 			productName = Weatherly;
 			productReference = 849CC38528605E0400697534 /* Weatherly.app */;
@@ -209,6 +212,7 @@
 			mainGroup = 849CC37C28605E0400697534;
 			packageReferences = (
 				655BD2E5287C63210033EE5F /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				655BD2EE2880172B0033EE5F /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = 849CC38628605E0400697534 /* Products */;
 			projectDirPath = "";
@@ -486,6 +490,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		655BD2EE2880172B0033EE5F /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -493,6 +505,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 655BD2E5287C63210033EE5F /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		655BD2EF2880172B0033EE5F /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 655BD2EE2880172B0033EE5F /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
