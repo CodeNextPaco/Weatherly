@@ -33,27 +33,14 @@ class WeatherViewController: UIViewController {
       tableView.dataSource = self
     }
     
-    func setLottie(condition: String){
+    func setLottie(from icon: String){
 
         //clear the previous lottie
         for subview in lottieView.subviews{
             subview.removeFromSuperview()
         }
         
-        switch condition {
-            
-            case "overcast clouds":  animationView = .init(name: "cloudy")
-            case "broken clouds": animationView = .init(name: "partly_cloudy")
-            case "scattered clouds": animationView = .init(name: "partly_cloudy")
-            case "few clouds": animationView = .init(name: "partly_cloudy")
-            case "clear sky": animationView = .init(name: "sunny")
-            case "snow": animationView = .init(name: "light_snow")
-            case "rain": animationView = .init(name: "heavy_rain")
-            
-        
-            default: animationView = .init(name: "sunny")
-        }
-        
+        animationView = .init(name: Constants.getLottieAnimation(from: icon))
         animationView?.loopMode = .loop
         animationView?.frame = lottieView.bounds
         lottieView.insertSubview(animationView!, at: 0)
@@ -74,8 +61,9 @@ class WeatherViewController: UIViewController {
     func updateUI() {
 
         let currentWeather = weatherManager.currentWeather
-        let currentMain =  currentWeather.weather[0].main //current basic condition for lottie
-        let desc = currentWeather.weather[0].description
+        let currentMain =  currentWeather.weather.first?.main //current basic condition for lottie
+        let desc = currentWeather.weather.first?.description
+        let icon = currentWeather.weather.first?.icon ?? ""
         let temp = String(format: "%.0f", currentWeather.main.temp)
         let feels_like = String(currentWeather.main.feels_like)
         let max = "\(Int(currentWeather.main.temp_max))°"
@@ -83,7 +71,7 @@ class WeatherViewController: UIViewController {
         let hum = String(currentWeather.main.humidity)
         
         DispatchQueue.main.async {
-            self.setLottie(condition: desc)
+            self.setLottie(from: icon)
             self.tempNowLabel.text = "\(temp)°F"
             self.locationLabel.text = "\(self.weatherManager.currentLocation.name)"
             self.outputLabel.text = desc
