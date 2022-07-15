@@ -40,9 +40,11 @@ class WeatherManager {
         return
       }
       self.currentLocation = location
-      self.fetchCurrentWeather(from: location)
-      self.fetchForecast(from: location)
-      completionHandler?()
+        self.fetchCurrentWeather(from: location) {
+            self.fetchForecast(from: location) {
+                completionHandler?()
+            }
+        }
     }
   }
 }

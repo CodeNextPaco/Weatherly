@@ -17,20 +17,19 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var tempNowLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outputLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lottieView: UIView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tempHighLabel: UILabel!
     @IBOutlet weak var tempLowLabel: UILabel!
     
+    @IBOutlet var dayViewCollection: [UIView]!
+    
     var animationView : AnimationView?
     var weatherManager = WeatherManager()
-  
+    
     override func viewDidLoad() {
       super.viewDidLoad()
-      
-      tableView.delegate = self
-      tableView.dataSource = self
+        
     }
     
     func setLottie(from icon: String){
@@ -77,36 +76,52 @@ class WeatherViewController: UIViewController {
             self.outputLabel.text = desc
             self.tempLowLabel.text = min
             self.tempHighLabel.text = max
-            self.tableView.reloadData()
+            
+            let dailyHighLowForecast =  self.weatherManager.weatherForecast.dailyHighLowForecast()
+            
+            for (idx, (day, (highTemp, lowTemp))) in dailyHighLowForecast.enumerated() {
+                let view = self.dayViewCollection[idx]
+                view.layer.cornerRadius = 8
+                guard let stackView = view.subviews.first,
+                      let dayLabel = stackView.subviews[0] as? UILabel,
+                      let dayTempLabel = stackView.subviews[2] as? UILabel
+                else {
+                    print("stackview reference error")
+                    return
+                }
+                let dayAnimationView_ = stackView.subviews[1]
+                dayLabel.text = day.rawValue
+                dayTempLabel.text = "\(highTemp)°/\(lowTemp)°"
+            }
         }
     }
 }
 
+////
+//// MARK: -Table View Delegate
+////
+//extension WeatherViewController: UITableViewDelegate {}
 //
-// MARK: -Table View Delegate
+////
+//// MARK: -Table View Data Source
+////
+//extension WeatherViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.weatherManager.weatherForecast.list.count
+//    }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell") as! WeatherCell
 //
-extension WeatherViewController: UITableViewDelegate {}
-
+//        let forecasts = self.weatherManager.weatherForecast.list
+//        let cellTemp = String(format: "%.0f", forecasts[indexPath.row].main.temp) + "°F"
+//        let dateTime = forecasts[indexPath.row].formattedDate()
 //
-// MARK: -Table View Data Source
+//        cell.cellTempLabel.text = cellTemp + " " + dateTime
 //
-extension WeatherViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.weatherManager.weatherForecast.list.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell") as! WeatherCell
-
-        let forecasts = self.weatherManager.weatherForecast.list
-        let cellTemp = String(format: "%.0f", forecasts[indexPath.row].main.temp) + "°F"
-        let dateTime = forecasts[indexPath.row].formattedDate()
-
-        cell.cellTempLabel.text = cellTemp + " " + dateTime
-
-        let iconString = forecasts[indexPath.row].weather[0].icon
-        let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
-        print("ICON: \(iconURL)" )
-        Nuke.loadImage(with: iconURL, into: cell.weatherIcon)
-        return cell
-   }
-}
+//        let iconString = forecasts[indexPath.row].weather[0].icon
+//        let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
+//        print("ICON: \(iconURL)" )
+//        Nuke.loadImage(with: iconURL, into: cell.weatherIcon)
+//        return cell
+//   }
+//}

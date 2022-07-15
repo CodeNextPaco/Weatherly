@@ -43,4 +43,37 @@ struct Constants {
             return "dClearSky"
         }
     }
+    
+    enum days: String, CaseIterable, Comparable {
+        case Sun
+        case Mon
+        case Tue
+        case Wed
+        case Thur
+        case Fri
+        case Sat
+        
+        private var sortOrder: Int {
+            switch self {
+                case .Sun: return 0
+                case .Mon: return 1
+                case .Tue: return 2
+                case .Wed: return 3
+                case .Thur: return 4
+                case .Fri: return 5
+                case .Sat: return 6
+            }
+        }
+        
+        static func < (lhs: Constants.days, rhs: Constants.days) -> Bool {
+            return lhs.sortOrder < rhs.sortOrder
+        }
+    }
+    static var currentWeekday: days = {
+        let calendar = Calendar(identifier: .gregorian)
+        // 1 = Sun
+        // 7 = Sat
+        let dayIndex = calendar.component(.weekday, from: Date())
+        return Constants.days.allCases[dayIndex - 1]
+    }()
 }

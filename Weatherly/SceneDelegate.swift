@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             defaultLocation.country = "US"
             defaultLocation.lat = 37.7790262
             defaultLocation.lon = -122.419906
-            weatherViewController.weatherManager.fetchCurrentWeather(from: defaultLocation) {
+            weatherViewController.weatherManager.fetchCurrentWeatherAndForecast(from: "San Francisco") {
                 weatherViewController.updateUI()
             }
         }
