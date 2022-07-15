@@ -20,3 +20,7 @@ TODOs:
 
 ### Helpful Articles
 - [Raywenderlich intro article on NUKE](https://www.raywenderlich.com/11070743-nuke-tutorial-for-ios-getting-started) 
+- Horizontal Scroll View
+    - 
+    https://riptutorial.com/ios/example/12812/scrolling-content-with-auto-layout-enabled
+    - https://iosexample.com/uiscrollview-vertical-horizontal-scrolling/
