@@ -21,7 +21,6 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tempHighLabel: UILabel!
     @IBOutlet weak var tempLowLabel: UILabel!
-    
     @IBOutlet var dayViewCollection: [UIView]!
     
     var animationView : AnimationView?
@@ -29,7 +28,6 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
       super.viewDidLoad()
-        
     }
     
     func setLottie(from icon: String){
@@ -96,32 +94,3 @@ class WeatherViewController: UIViewController {
         }
     }
 }
-
-////
-//// MARK: -Table View Delegate
-////
-//extension WeatherViewController: UITableViewDelegate {}
-//
-////
-//// MARK: -Table View Data Source
-////
-//extension WeatherViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.weatherManager.weatherForecast.list.count
-//    }
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell") as! WeatherCell
-//
-//        let forecasts = self.weatherManager.weatherForecast.list
-//        let cellTemp = String(format: "%.0f", forecasts[indexPath.row].main.temp) + "°F"
-//        let dateTime = forecasts[indexPath.row].formattedDate()
-//
-//        cell.cellTempLabel.text = cellTemp + " " + dateTime
-//
-//        let iconString = forecasts[indexPath.row].weather[0].icon
-//        let iconURL = URL(string: "https://openweathermap.org/img/wn/\(iconString).png")!
-//        print("ICON: \(iconURL)" )
-//        Nuke.loadImage(with: iconURL, into: cell.weatherIcon)
-//        return cell
-//   }
-//}
