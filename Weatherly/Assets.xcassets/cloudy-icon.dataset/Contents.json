@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "cloudy-icon.gif",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
