@@ -97,7 +97,6 @@ class WeatherViewController: UIViewController {
             for (idx, (day, (highTemp, lowTemp))) in dailyHighLowForecast.enumerated() {
                 let view = self.dayViewCollection[idx]
                 view.layer.cornerRadius = 8
-                view.isHidden = false // edge case where forecase only gives 5 days instead of 6
                 print(day, highTemp, lowTemp)
                 guard let stackView = view.subviews.first,
                       let dayLabel = stackView.subviews[0] as? UILabel,

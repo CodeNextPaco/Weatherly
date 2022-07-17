@@ -24,3 +24,9 @@ TODOs:
     - 
     https://riptutorial.com/ios/example/12812/scrolling-content-with-auto-layout-enabled
     - https://iosexample.com/uiscrollview-vertical-horizontal-scrolling/
+
+Potholes
+- For an unexplainable reason, the view holding a lottie animation in the daily horizontal card stack displays
+a small lottie using a 1 aspect ratio constraint. As a 'bandaid', I a slightly smaller aspect ratio of 0.99 is used.
+- The week forecast's high and low temperatures for each day are inaccurate because of the 3hr intervals. They often miss the highest and lowest temperatures. This is a shortcoming of the data in the Weather API endpoint.  
+- Edge case: 6 days of forecast are given when time has already passed on the current day, spreading the 40 guarenteed 3hr forecasts to a 6th day. When the 5day/3hr forecast does not provide a 6th day and only gives 5 days, the 6th day card will be displayed and unused. A workaround is to toggle `isHidden` to true on the 6th card using the storyboard's attribute inspector, and when iterating and configuring the cards in the VC, toggle `isHidden` to false.
