@@ -23,20 +23,38 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var tempLowLabel: UILabel!
     @IBOutlet var dayViewCollection: [UIView]!
     
-    var animationView : AnimationView?
+    @IBOutlet weak var feelsLikeLottieView: UIView!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
+    
+    @IBOutlet weak var precipitationLottieView: UIView!
+    @IBOutlet weak var precipitationLabel: UILabel!
+    
+    @IBOutlet weak var sunLottieView: UIView!
+    @IBOutlet weak var sunLabel: UILabel!
+    
+    @IBOutlet weak var windLottieView: UIView!
+    @IBOutlet weak var windLabel: UILabel!
+    
     var weatherManager = WeatherManager()
     
     override func viewDidLoad() {
-      super.viewDidLoad()
+        super.viewDidLoad()
+        setBackground()
+    }
+    
+    func setBackground() {
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "Page1")
+        backgroundImage.contentMode =  UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
     }
     
     func setLottie(from icon: String){
-
         //clear the previous lottie
         for subview in lottieView.subviews{
             subview.removeFromSuperview()
         }
-        
+        var animationView : AnimationView?
         animationView = .init(name: Constants.getLottieAnimation(from: icon))
         animationView?.loopMode = .loop
         animationView?.frame = lottieView.bounds
@@ -44,13 +62,12 @@ class WeatherViewController: UIViewController {
         animationView?.animationSpeed = 0.8
         animationView?.play()
     }
-   
-    @IBAction func searchForLocation(_ sender: Any) {
     
+    @IBAction func searchForLocation(_ sender: Any) {
         if(!searchField.text!.isEmpty){
             print("Search for location:")
             self.weatherManager.fetchCurrentWeatherAndForecast(from: searchField.text!) {
-                    self.updateUI()
+                self.updateUI()
             }
         }
     }
@@ -62,10 +79,9 @@ class WeatherViewController: UIViewController {
         let desc = currentWeather.weather.first?.description
         let icon = currentWeather.weather.first?.icon ?? ""
         let temp = String(format: "%.0f", currentWeather.main.temp)
-        let feels_like = String(currentWeather.main.feels_like)
+        let feelsLike = String(currentWeather.main.feels_like)
         let max = "\(Int(currentWeather.main.temp_max))°"
         let min = "\(Int(currentWeather.main.temp_min))°"
-        let hum = String(currentWeather.main.humidity)
         
         DispatchQueue.main.async {
             self.setLottie(from: icon)
@@ -91,6 +107,8 @@ class WeatherViewController: UIViewController {
                 dayLabel.text = day.rawValue
                 dayTempLabel.text = "\(highTemp)°/\(lowTemp)°"
             }
+            
+            self.feelsLikeLabel.text = feelsLike
         }
     }
 }

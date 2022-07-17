@@ -140,7 +140,7 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94626966059999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="250" id="10w-v3-rYJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="YcY-Vk-8ka" secondAttribute="trailing" constant="16" id="Dqe-vn-aHY"/>
@@ -184,7 +184,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94626966059999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstItem="9lb-fy-wLO" firstAttribute="top" secondItem="tde-EJ-CJq" secondAttribute="top" constant="17" id="Fqp-Hx-JNL"/>
                                                                     <constraint firstItem="9lb-fy-wLO" firstAttribute="centerX" secondItem="tde-EJ-CJq" secondAttribute="centerX" id="H3O-WI-8Y2"/>
@@ -221,7 +221,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94626966059999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="HKb-Ok-lWt"/>
                                                                     <constraint firstAttribute="bottom" secondItem="uMZ-VU-d1r" secondAttribute="bottom" constant="16" id="lb1-xz-lak"/>
@@ -258,7 +258,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94626966059999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstItem="iCN-hl-pAj" firstAttribute="centerX" secondItem="LVF-ch-G0r" secondAttribute="centerX" id="9sP-ls-jhd"/>
                                                                     <constraint firstAttribute="bottom" secondItem="iCN-hl-pAj" secondAttribute="bottom" constant="16" id="a9w-H0-2Ue"/>
@@ -295,7 +295,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94626966059999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstItem="IAV-M6-pXL" firstAttribute="centerX" secondItem="z8m-1P-CzM" secondAttribute="centerX" id="8up-Rq-jg0"/>
                                                                     <constraint firstItem="IAV-M6-pXL" firstAttribute="top" secondItem="z8m-1P-CzM" secondAttribute="top" constant="17" id="B7e-IR-BbP"/>
@@ -332,7 +332,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94626966059999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="INe-ua-9LA"/>
                                                                     <constraint firstItem="os1-qj-lZ5" firstAttribute="top" secondItem="Oom-S1-bVf" secondAttribute="top" constant="17" id="LOC-Nq-ou6"/>
@@ -369,7 +369,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="Bfn-Ra-M6T" secondAttribute="bottom" constant="16" id="3Ex-Ag-kho"/>
                                                                     <constraint firstAttribute="width" constant="100" id="JmS-Hf-ynd"/>
@@ -591,14 +591,22 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="feelsLikeLabel" destination="ea9-uB-5Ft" id="Itw-PL-MYp"/>
+                        <outlet property="feelsLikeLottieView" destination="by1-Bi-L2P" id="1a7-td-RgU"/>
                         <outlet property="locationLabel" destination="EfS-yf-1GO" id="SX6-IP-cU9"/>
                         <outlet property="lottieView" destination="eTd-lz-Eu4" id="2pg-4M-Hva"/>
                         <outlet property="outputLabel" destination="h7n-ek-icg" id="F53-mf-Gxg"/>
+                        <outlet property="precipitationLabel" destination="ZgL-Ba-4yi" id="vOm-UW-b5j"/>
+                        <outlet property="precipitationLottieView" destination="GF3-kg-jpw" id="yRH-Ph-gXC"/>
                         <outlet property="scrollView" destination="zpp-kq-gOP" id="jPW-3b-4VQ"/>
                         <outlet property="searchField" destination="pMZ-pM-Mqm" id="MkV-z5-Crx"/>
+                        <outlet property="sunLabel" destination="Yrd-70-Kn6" id="hkz-zk-EWC"/>
+                        <outlet property="sunLottieView" destination="4Iz-vf-ZtY" id="7TE-lP-7C5"/>
                         <outlet property="tempHighLabel" destination="bmh-IW-nd0" id="84F-e4-fpr"/>
                         <outlet property="tempLowLabel" destination="UG8-Fa-srD" id="XOH-fT-faf"/>
                         <outlet property="tempNowLabel" destination="3bg-Nd-cf9" id="Yxa-6e-zpP"/>
+                        <outlet property="windLabel" destination="xK1-Ck-Fcx" id="hOL-WS-TwA"/>
+                        <outlet property="windLottieView" destination="nAm-Mb-tCg" id="mRd-gp-J6y"/>
                         <outletCollection property="dayViewCollection" destination="tde-EJ-CJq" collectionClass="NSMutableArray" id="RmT-iS-qrO"/>
                         <outletCollection property="dayViewCollection" destination="Bpi-wW-B2T" collectionClass="NSMutableArray" id="79V-iV-HPZ"/>
                         <outletCollection property="dayViewCollection" destination="LVF-ch-G0r" collectionClass="NSMutableArray" id="ERe-v3-IcO"/>
