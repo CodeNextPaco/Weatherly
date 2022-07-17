@@ -17,7 +17,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var tempNowLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var outputLabel: UILabel!
-    @IBOutlet weak var lottieView: UIView!
+    @IBOutlet weak var currentWeatherAnimationView: UIView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tempHighLabel: UILabel!
     @IBOutlet weak var tempLowLabel: UILabel!
@@ -48,7 +48,7 @@ class WeatherViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
     }
     
-    func setLottie(from icon: String){
+    func setLottie(on lottieView: UIView, from icon: String){
         //clear the previous lottie
         for subview in lottieView.subviews{
             subview.removeFromSuperview()
@@ -57,6 +57,7 @@ class WeatherViewController: UIViewController {
         animationView = .init(name: Constants.getLottieAnimation(from: icon))
         animationView?.loopMode = .loop
         animationView?.frame = lottieView.bounds
+//        animationView?.contentMode = .scaleToFill
         lottieView.insertSubview(animationView!, at: 0)
         animationView?.animationSpeed = 0.8
         animationView?.play()
@@ -84,7 +85,7 @@ class WeatherViewController: UIViewController {
         let sunLabel = currentWeather.formattedSunsetSunrise()
         
         DispatchQueue.main.async {
-            self.setLottie(from: icon)
+            self.setLottie(on: self.currentWeatherAnimationView, from: icon)
             self.tempNowLabel.text = "\(temp)°F"
             self.locationLabel.text = "\(self.weatherManager.currentLocation.name)"
             self.outputLabel.text = desc
@@ -106,7 +107,9 @@ class WeatherViewController: UIViewController {
                     return
                 }
                 
-                let dayAnimationView_ = stackView.subviews[1]
+                let dayAnimationView = stackView.subviews[1]
+                self.setLottie(on: dayAnimationView, from: "01d")
+//                dayAnimationView.backgroundColor = .red
                 dayLabel.text = day.rawValue
                 dayTempLabel.text = "\(highTemp)°/\(lowTemp)°"
             }
