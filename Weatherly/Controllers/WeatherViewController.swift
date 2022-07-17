@@ -29,7 +29,6 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var precipitationLottieView: UIView!
     @IBOutlet weak var precipitationLabel: UILabel!
     
-    @IBOutlet weak var sunLottieView: UIView!
     @IBOutlet weak var sunLabel: UILabel!
     
     @IBOutlet weak var windLottieView: UIView!
@@ -75,13 +74,14 @@ class WeatherViewController: UIViewController {
     func updateUI() {
 
         let currentWeather = weatherManager.currentWeather
-        let currentMain =  currentWeather.weather.first?.main //current basic condition for lottie
-        let desc = currentWeather.weather.first?.description
-        let icon = currentWeather.weather.first?.icon ?? ""
-        let temp = String(format: "%.0f", currentWeather.main.temp)
-        let feelsLike = String(currentWeather.main.feels_like)
-        let max = "\(Int(currentWeather.main.temp_max))°"
-        let min = "\(Int(currentWeather.main.temp_min))°"
+        let main =  currentWeather.weather.first //current basic condition for lottie
+        let desc = currentWeather.weather.first!.description
+        let icon = currentWeather.weather.first!.icon
+        let temp = "\(Int(currentWeather.main.temp))"
+        let feelsLike = "\(currentWeather.main.feelsLike)°"
+        let max = "\(Int(currentWeather.main.tempMax))°"
+        let min = "\(Int(currentWeather.main.tempMin))°"
+        let sunLabel = currentWeather.formattedSunsetSunrise()
         
         DispatchQueue.main.async {
             self.setLottie(from: icon)
@@ -96,6 +96,8 @@ class WeatherViewController: UIViewController {
             for (idx, (day, (highTemp, lowTemp))) in dailyHighLowForecast.enumerated() {
                 let view = self.dayViewCollection[idx]
                 view.layer.cornerRadius = 8
+                view.isHidden = false // edge case where forecase only gives 5 days instead of 6
+                print(day, highTemp, lowTemp)
                 guard let stackView = view.subviews.first,
                       let dayLabel = stackView.subviews[0] as? UILabel,
                       let dayTempLabel = stackView.subviews[2] as? UILabel
@@ -103,12 +105,14 @@ class WeatherViewController: UIViewController {
                     print("stackview reference error")
                     return
                 }
+                
                 let dayAnimationView_ = stackView.subviews[1]
                 dayLabel.text = day.rawValue
                 dayTempLabel.text = "\(highTemp)°/\(lowTemp)°"
             }
             
             self.feelsLikeLabel.text = feelsLike
+            self.sunLabel.text = sunLabel
         }
     }
 }

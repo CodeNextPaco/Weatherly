@@ -34,9 +34,9 @@ class Network {
       
       do {
         if let jsonData = data {
-          let decoder = JSONDecoder()
-
-          let typedObject: T? = try decoder.decode(T.self, from: jsonData)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let typedObject: T? = try decoder.decode(T.self, from: jsonData)
           completionHandler(typedObject, nil)
         }
       } catch {

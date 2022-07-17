@@ -8,11 +8,12 @@
 import Foundation
 
 struct WeatherForecast: Decodable {
-    var list: [CurrentWeather]
+    var list: [HourForecast]
     
     init() {
         list = []
     }
+    
     func dailyHighLowForecast() -> [(Constants.days, (Int, Int))] {
         if list.isEmpty {
             print("No data to get daily temp forecast")
@@ -20,8 +21,7 @@ struct WeatherForecast: Decodable {
         }
         var forecastDict = [Constants.days: [Double]]()
         for currentWeather in list {
-            print(currentWeather.dayOfWeek())
-            forecastDict[currentWeather.dayOfWeek(), default: [Double]()].append(currentWeather.main.temp)
+            forecastDict[Constants.dayOfWeek(from: currentWeather.dt), default: [Double]()].append(currentWeather.main.temp)
         }
         let forecastArray = forecastDict.map { dailyTemps in
             return ( dailyTemps.key,
@@ -36,4 +36,10 @@ struct WeatherForecast: Decodable {
         let rhs = Array(sortedForecastArray[indexOfCurrentDay...])
         return rhs + lhs
     }
+}
+struct HourForecast: Decodable {
+    var main: Main
+    var weather: [Weather]
+    var dt: Double
+    var pop: Double
 }

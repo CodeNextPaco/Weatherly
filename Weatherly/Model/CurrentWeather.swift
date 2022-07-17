@@ -8,45 +8,55 @@
 import Foundation
 
 struct CurrentWeather {
-    var main: WeatherMain
-    var weather: [WeatherDetail]
-    var name: String?
-    var pop: Double?
+    var main: Main
+    var weather: [Weather]
+    var sys: Sys
+    var name: String
     var dt: Double
+    var timezone: Double
     
     func formattedDate() -> String {
         return Constants.DateFormatters.simpleDateFormatter
                 .string(from: Date(timeIntervalSince1970: dt))
     }
-    func dayOfWeek() -> Constants.days {
-        let date = Date(timeIntervalSince1970: dt)
-        let calendar = Calendar(identifier: .gregorian)
-        /// Calendar API weekday: 1 = Sun, 7 = Sat
-        let dayIndex = calendar.component(.weekday, from: date)
-        return Constants.days.allCases[dayIndex - 1]
+    
+    func formattedSunsetSunrise() -> String {
+        let formattedSunrise = Constants.DateFormatters.timeFormatter
+            .string(from: Date(timeIntervalSince1970: sys.sunrise! + timezone))
+        let formattedSunset = Constants.DateFormatters.timeFormatter
+            .string(from: Date(timeIntervalSince1970: sys.sunset! + timezone))
+        return formattedSunrise + formattedSunset
     }
 }
 
 extension CurrentWeather: Decodable {
     
+    /// Put initializer in an extension to preserve the struct's free memberwise initializer.
+    /// We want both, but don't want to write the memberwise initializer if we don't need to.
     init() {
         name = ""
         dt = 0.0
-        main = WeatherMain(temp: 0.0, temp_min: 0.0, temp_max: 0.0, humidity:0.0, feels_like: 0.0)
+        sys = Sys(sunrise: 0, sunset: 0)
+        main = Main(temp: 0.0, tempMin: 0.0, tempMax: 0.0, humidity:0.0, feelsLike: 0.0)
         weather = []
+        timezone = 0
     }
-    struct WeatherMain: Decodable {
-        var temp: Double
-        var temp_min: Double
-        var temp_max: Double
-        var humidity: Double
-        var feels_like: Double
-    }
-    
-    struct WeatherDetail: Decodable {
-        var main: String
-        var description: String
-        var icon: String
-    }
+}
+struct Main: Decodable {
+    var temp: Double
+    var tempMin: Double
+    var tempMax: Double
+    var humidity: Double
+    var feelsLike: Double
+}
+
+struct Weather: Decodable {
+    var description: String
+    var icon: String
+}
+
+struct Sys: Decodable {
+    var sunrise: Double?
+    var sunset: Double?
 }
 

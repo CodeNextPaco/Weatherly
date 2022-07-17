@@ -12,11 +12,29 @@ struct Constants {
     struct DateFormatters {
         static let simpleDateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "en_US")
+            dateFormatter.locale = Locale.current
+            dateFormatter.timeZone = TimeZone(identifier: "GMT")
             dateFormatter.timeStyle = .short
             dateFormatter.dateStyle = .short
             return dateFormatter
         }()
+        
+        static let timeFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale.current
+            dateFormatter.timeZone = TimeZone(identifier: "GMT")
+            dateFormatter.timeStyle = .short
+            dateFormatter.dateStyle = .none
+            return dateFormatter
+        }()
+    }
+    
+    static func dayOfWeek(from dt: Double) -> Constants.days {
+        let date = Date(timeIntervalSince1970: dt)
+        let calendar = Calendar(identifier: .gregorian)
+        /// Calendar API weekday: 1 = Sun, 7 = Sat
+        let dayIndex = calendar.component(.weekday, from: date)
+        return Constants.days.allCases[dayIndex - 1]
     }
     
     static func getLottieAnimation(from icon: String) -> String {
