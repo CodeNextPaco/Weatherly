@@ -21,8 +21,7 @@ struct CurrentWeather {
     func dayOfWeek() -> Constants.days {
         let date = Date(timeIntervalSince1970: dt)
         let calendar = Calendar(identifier: .gregorian)
-        // 1 = Sun
-        // 7 = Sat
+        /// Calendar API weekday: 1 = Sun, 7 = Sat
         let dayIndex = calendar.component(.weekday, from: date)
         return Constants.days.allCases[dayIndex - 1]
     }
