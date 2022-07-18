@@ -50,7 +50,7 @@ struct Constants {
             case "15d": return "dMist"
             case "01n": return "nClearSky"
             case "02n": return "dFewClouds"
-            case "03n": return "nScatteredClouds"
+//            case "03n": return "nScatteredClouds"
             case "04n": return "nBrokenClouds"
             case "09n": return "nShowerRain"
             case "10n": return "nRain"
@@ -58,7 +58,7 @@ struct Constants {
             case "13n": return "nSnow"
             case "15n": return "nMist"
         default:
-            return "dClearSky"
+            return icon.contains("d") ? "dClearSky" : "nClearSky"
         }
     }
     
@@ -70,7 +70,7 @@ struct Constants {
         case Thur
         case Fri
         case Sat
-        
+        /// this is needed to sort days
         private var sortOrder: Int {
             switch self {
                 case .Sun: return 0
