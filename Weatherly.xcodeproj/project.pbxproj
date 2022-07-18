@@ -89,6 +89,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		659767DA2885820100CD8285 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				84088D452860F2BA00B3942C /* Lotties */,
+				849CC38E28605E0400697534 /* Main.storyboard */,
+				849CC39128605E0E00697534 /* Assets.xcassets */,
+				849CC39328605E0E00697534 /* LaunchScreen.storyboard */,
+				849CC39628605E0E00697534 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		84088D452860F2BA00B3942C /* Lotties */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +140,7 @@
 		846B6ECC2867B1DB00CEAB82 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				659767D8288570D900CD8285 /* RoundedCornerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -153,26 +166,21 @@
 			children = (
 				849CC38828605E0400697534 /* AppDelegate.swift */,
 				849CC38A28605E0400697534 /* SceneDelegate.swift */,
-				849CC38E28605E0400697534 /* Main.storyboard */,
-				849CC39128605E0E00697534 /* Assets.xcassets */,
-				849CC39328605E0E00697534 /* LaunchScreen.storyboard */,
-				849CC39628605E0E00697534 /* Info.plist */,
 				655BD2C42873D9C90033EE5F /* Constants.swift */,
-				84088D452860F2BA00B3942C /* Lotties */,
 				846B6ECC2867B1DB00CEAB82 /* View */,
 				84088D582861199D00B3942C /* Model */,
-				84DB761A2860F043009A9DFB /* Controllers */,
-				659767D8288570D900CD8285 /* RoundedCornerView.swift */,
+				84DB761A2860F043009A9DFB /* Controller */,
+				659767DA2885820100CD8285 /* Resources */,
 			);
 			path = Weatherly;
 			sourceTree = "<group>";
 		};
-		84DB761A2860F043009A9DFB /* Controllers */ = {
+		84DB761A2860F043009A9DFB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				849CC38C28605E0400697534 /* WeatherViewController.swift */,
 			);
-			path = Controllers;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,7 +439,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BBNB69K57G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Weatherly/Info.plist;
+				INFOPLIST_FILE = Weatherly/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -459,7 +467,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BBNB69K57G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Weatherly/Info.plist;
+				INFOPLIST_FILE = Weatherly/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
