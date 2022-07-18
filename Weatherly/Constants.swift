@@ -9,6 +9,7 @@ import Foundation
 
 struct Constants {
     
+    /// GMT is used because Weather API returns time in UTC (aka GMT)
     struct DateFormatters {
         static let simpleDateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
@@ -29,10 +30,11 @@ struct Constants {
         }()
     }
     
+    /// Given seconds since 1970, return the day of the week
+    /// Calendar API weekday: 1 = Sun, 7 = Sat
     static func dayOfWeek(from dt: Double) -> Constants.days {
         let date = Date(timeIntervalSince1970: dt)
         let calendar = Calendar(identifier: .gregorian)
-        /// Calendar API weekday: 1 = Sun, 7 = Sat
         let dayIndex = calendar.component(.weekday, from: date)
         return Constants.days.allCases[dayIndex - 1]
     }
@@ -49,11 +51,11 @@ struct Constants {
             case "13d": return "dSnow"
             case "15d": return "dMist"
             case "01n": return "nClearSky"
-            case "02n": return "dFewClouds"
+//            case "02n": return "nFewClouds"
 //            case "03n": return "nScatteredClouds"
             case "04n": return "nBrokenClouds"
             case "09n": return "nShowerRain"
-            case "10n": return "nRain"
+//            case "10n": return "nRain"
             case "11n": return "nThunderstorm"
             case "13n": return "nSnow"
             case "15n": return "nMist"
@@ -87,10 +89,10 @@ struct Constants {
             return lhs.sortOrder < rhs.sortOrder
         }
     }
+    /// Returns the current day of the week
+    /// 1=sun 7=sat
     static var currentWeekday: days = {
         let calendar = Calendar(identifier: .gregorian)
-        // 1 = Sun
-        // 7 = Sat
         let dayIndex = calendar.component(.weekday, from: Date())
         return Constants.days.allCases[dayIndex - 1]
     }()
