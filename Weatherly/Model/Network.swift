@@ -7,13 +7,7 @@
 
 import Foundation
 
-//
-// MARK: - Network
-//
 class Network {
-  //
-  // MARK: - Class Methods
-  //
     static func loadJSONFile<T: Decodable>(from url: String,
                                          type: T.Type,
                                          completionHandler: @escaping (T?, NetworkError?) -> Void) {
