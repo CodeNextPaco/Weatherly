@@ -42,4 +42,5 @@ struct HourForecast: Decodable {
     var weather: [Weather]
     var dt: Double
     var pop: Double
+    var wind: Wind
 }

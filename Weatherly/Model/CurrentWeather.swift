@@ -14,18 +14,20 @@ struct CurrentWeather {
     var name: String
     var dt: Double
     var timezone: Double
+    var wind: Wind
     
     func formattedDate() -> String {
         return Constants.DateFormatters.simpleDateFormatter
                 .string(from: Date(timeIntervalSince1970: dt))
     }
     
-    func formattedSunsetSunrise() -> String {
-        let formattedSunrise = Constants.DateFormatters.timeFormatter
+    func formattedSunriseTime() -> String {
+        return Constants.DateFormatters.timeFormatter
             .string(from: Date(timeIntervalSince1970: sys.sunrise! + timezone))
-        let formattedSunset = Constants.DateFormatters.timeFormatter
+    }
+    func formattedSunsetTime() -> String {
+        return Constants.DateFormatters.timeFormatter
             .string(from: Date(timeIntervalSince1970: sys.sunset! + timezone))
-        return formattedSunrise + formattedSunset
     }
 }
 
@@ -40,6 +42,7 @@ extension CurrentWeather: Decodable {
         main = Main(temp: 0.0, tempMin: 0.0, tempMax: 0.0, humidity:0.0, feelsLike: 0.0)
         weather = []
         timezone = 0
+        wind = Wind(speed: 0, deg: 0)
     }
 }
 struct Main: Decodable {
@@ -58,5 +61,9 @@ struct Weather: Decodable {
 struct Sys: Decodable {
     var sunrise: Double?
     var sunset: Double?
+}
+struct Wind: Decodable {
+    var speed: Double
+    var deg: Double
 }
 
