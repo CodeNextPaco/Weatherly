@@ -18,7 +18,6 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var currentWeatherAnimationView: UIView!
-    @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tempHighLabel: UILabel!
     @IBOutlet weak var tempLowLabel: UILabel!
     @IBOutlet var dayViewCollection: [UIView]!
@@ -30,10 +29,20 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var windDirectionLabel: UILabel!
     
     var weatherManager = WeatherManager()
-    
+    let searchController = UISearchController(searchResultsController: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackground()
+        
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnTap = true
+        searchController.searchBar.placeholder = "Enter City..."
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        searchController.obscuresBackgroundDuringPresentation = false
     }
     
     func setBackground() {
@@ -57,15 +66,6 @@ class WeatherViewController: UIViewController {
         animationView?.play()
     }
     
-    @IBAction func searchForLocation(_ sender: Any) {
-        if(!searchField.text!.isEmpty){
-            print("Search for location:")
-            self.weatherManager.fetchCurrentWeatherAndForecast(from: searchField.text!) {
-                self.updateUI()
-            }
-        }
-    }
-
     func updateUI() {
 
         let currentWeather = weatherManager.currentWeather
@@ -102,6 +102,23 @@ class WeatherViewController: UIViewController {
             self.sunsetLabel.text = currentWeather.formattedSunsetTime()
             self.windSpeedLabel.text = "\(currentWeather.wind.speed) mph"
             self.windDirectionLabel.text = "\(currentWeather.wind.deg)°"
+            
+            self.navigationController?.navigationBar.isHidden = true
+        }
+    }
+}
+
+extension WeatherViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+            print(text)
+        
+        if(!text.isEmpty){
+            print("Search for location:")
+            self.weatherManager.fetchCurrentWeatherAndForecast(from: text) {
+                self.updateUI()
+            }
         }
     }
 }

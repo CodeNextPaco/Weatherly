@@ -6,17 +6,21 @@ This app uses the [Open Weather API](https://openweathermap.org/)
 It is a work in progress. See numbered branches for steps used to build the app. 
 
 TODOs: 
+1. [Strech Goal for students??] Store searched results in user defaults
+1. [Stretch Goal for students??] Make Search Bar provide suggested locations as user types (expected behavior)
+1. Inform user of invalid search query.
+1. Fix search bar bug:
+ - on most iphones, after dismissing the search bar on scroll up. The search bar does not re-appear on scroll down. It works properly on iPhone 13 Pro and iPhone 13 Pro Max
+ - Weirdly, a similar function to the Navbar's `hidesBarsOnSwipe`, `hidesBarsOnTap`, functions properly on all iphones.
+1. ~~Validate location: fix app crash when mispelled or non-existent locatioin is entered in search bar.~~
 1. ~~Format the Table view content further so it renders the correct time in local format (not UTC)~~
-2. Add a detail screen for extended forecast (currently table view has all 5 day, forecast objects every 3 hours)
-3. Calculate the real Daily High and Low (currently showing the temp_max and temp_min for a current location, not daily)
-4. Validate location: fix app crash when mispelled or non-existent locatioin is entered in search bar.
-5. Hide Table View until data is present (or load on startup)
-6. Store searched results in user defaults
-7. Make Search Bar provide suggested locations as user types (expected behavior)
-8. Maybe add Pexel images instead of Lotties for a prettier view
-9 . OR add more Lotties to the app that reflect more conditions. (update setLottie())
-10. Build a Networking class to handle all the Network requests - move out of APIManager
-11. Add more icons for max, min temps, humidity, wind, etc.
+2. [used cards on main VC instead]~~Add a detail screen for extended forecast (currently table view has all 5 day, forecast objects every 3 hours)~~
+3. ~~Calculate the real Daily High and Low (currently showing the temp_max and temp_min for a current location, not daily)~~
+5. [table view was removed]~~Hide Table View until data is present (or load on startup)~~
+8. ~~Maybe add Pexel images instead of Lotties for a prettier view~~
+9 . ~~OR add more Lotties to the app that reflect more conditions. (update setLottie())~~
+10. ~~Build a Networking class to handle all the Network requests - move out of APIManager~~
+11. ~~Add more icons for max, min temps, humidity, wind, etc.~~
 
 ### Helpful Articles
 - [Raywenderlich intro article on NUKE](https://www.raywenderlich.com/11070743-nuke-tutorial-for-ios-getting-started) 
