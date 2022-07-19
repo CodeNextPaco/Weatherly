@@ -12,6 +12,7 @@ TODOs:
 1. Fix search bar bug:
  - on most iphones, after dismissing the search bar on scroll up. The search bar does not re-appear on scroll down. It works properly on iPhone 13 Pro and iPhone 13 Pro Max
  - Weirdly, a similar function to the Navbar's `hidesBarsOnSwipe`, `hidesBarsOnTap`, functions properly on all iphones.
+ - Configure day card lottie animation to the weather's 12pm status
 1. ~~Validate location: fix app crash when mispelled or non-existent locatioin is entered in search bar.~~
 1. ~~Format the Table view content further so it renders the correct time in local format (not UTC)~~
 2. [used cards on main VC instead]~~Add a detail screen for extended forecast (currently table view has all 5 day, forecast objects every 3 hours)~~
