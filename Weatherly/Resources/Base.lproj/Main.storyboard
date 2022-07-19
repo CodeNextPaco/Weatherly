@@ -555,23 +555,23 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunrise" translatesAutoresizingMaskIntoConstraints="NO" id="2cq-Ha-ASU">
-                                                                                <rect key="frame" x="0.0" y="41.666666666666622" width="161" height="80.333333333333314"/>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunrise&amp;sunset" translatesAutoresizingMaskIntoConstraints="NO" id="2cq-Ha-ASU">
+                                                                                <rect key="frame" x="26.666666666666664" y="28.000000000000007" width="107.66666666666669" height="107.66666666666669"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="width" secondItem="2cq-Ha-ASU" secondAttribute="height" multiplier="2:1" id="wDN-lV-itt"/>
+                                                                                    <constraint firstAttribute="width" secondItem="2cq-Ha-ASU" secondAttribute="height" id="wDN-lV-itt"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="k2h-Be-9Gg">
-                                                                                <rect key="frame" x="0.0" y="146.66666666666663" width="161" height="14.333333333333343"/>
+                                                                                <rect key="frame" x="28" y="146.66666666666663" width="105" height="14.333333333333343"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="6:01 am" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLY-ea-wWL">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="14.333333333333334"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="47" height="14.333333333333334"/>
                                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="7:04 pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOq-sf-FOr">
-                                                                                        <rect key="frame" x="86" y="0.0" width="75" height="14.333333333333334"/>
+                                                                                        <rect key="frame" x="58" y="0.0" width="47" height="14.333333333333334"/>
                                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -582,9 +582,6 @@
                                                                                 </constraints>
                                                                             </stackView>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="k2h-Be-9Gg" firstAttribute="width" secondItem="2cq-Ha-ASU" secondAttribute="width" id="zzC-Wu-FJD"/>
-                                                                        </constraints>
                                                                     </stackView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.48627454040000001" green="0.67450982329999998" blue="0.91372549530000002" alpha="0.94626966059999995" colorSpace="custom" customColorSpace="displayP3"/>
@@ -733,6 +730,6 @@
         <image name="farenheit" width="328" height="512"/>
         <image name="humidity" catalog="system" width="128" height="98"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="sunrise" width="1432" height="882"/>
+        <image name="sunrise&amp;sunset" width="1078" height="880"/>
     </resources>
 </document>
