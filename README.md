@@ -12,6 +12,8 @@ An iOS app written in Swift that displays real-time weather from the [Open Weath
 
 The prerequisite(s) are installed using Swift Package Manager instead of Cocoapods. Upon the first build, SPM should download the dependencies automatically.
 
+Update the Weather API key inside Model/APIManager.swift
+
 ## Installation
 
 - Clone/Download the app to your Mac

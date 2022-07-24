@@ -9,7 +9,7 @@ import Foundation
 
 class APIManager: ObservableObject {
     
-  static private let apiKey = "1495b6e70be9d92ba6cafc1c60e83bd6"
+  static private let apiKey = "<insert API Key>"
 
   func getLocationFrom(query: String, completionHandler: @escaping (Location?, Error?) -> Void) {
         
