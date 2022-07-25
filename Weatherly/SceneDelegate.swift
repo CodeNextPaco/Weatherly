@@ -11,12 +11,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        if let navController = window?.rootViewController as? UINavigationController,
+           let weatherViewController = navController.viewControllers.first as? WeatherViewController {
+            
+            // Load default location
+            // STRECH GOAL: use user defaults to save the last search and show it on startup
+            var defaultLocation = Location()
+            defaultLocation.name = "San Francisco"
+            defaultLocation.country = "US"
+            defaultLocation.lat = 37.7790262
+            defaultLocation.lon = -122.419906
+            weatherViewController.weatherManager.fetchCurrentWeatherAndForecast(from: "San Francisco") {
+                weatherViewController.updateUI()
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
